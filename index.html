@@ -778,7 +778,7 @@
         <!-- HEADER -->
         <header class="nb-card">
             <div class="header-stat">
-                <span class="icon">🏪</span>
+                <span class="icon" id="egg-shop-icon" onclick="triggerLogoEgg()" style="cursor:pointer;" title="🤫">🏪</span>
                 <div style="flex: 1;">
                     <div class="stat-label" data-i18n="ui_shop">Cửa Hàng</div>
                     <div class="stat-value"><span id="display-shop-name" class="editable-name" onclick="editShopName()">Cyber Rig</span> ✏️</div>
@@ -798,7 +798,7 @@
                 <span class="icon">💰</span>
                 <div style="flex: 1;">
                     <div class="stat-label" data-i18n="ui_cash">Vốn (Cash)</div>
-                    <div class="stat-value" id="display-cash" style="color: #059669;">$5,000</div>
+                    <div class="stat-value" id="display-cash" style="color: #059669;">$2,500</div>
                 </div>
             </div>
             <div class="header-stat">
@@ -975,7 +975,7 @@
         <div class="modal-body" style="text-align: center;">
             <div style="font-size: 3rem;">💻✨</div>
             <h2 style="color:var(--purple); font-size:1.5rem;" data-i18n="onb_title">Chào Mừng Boss GenZ!</h2>
-            <p style="font-size:0.85rem; color:#444;" data-i18n="onb_desc">Bạn được cấp số vốn $5,000. Hãy đặt tên Shop và bắt đầu khởi nghiệp nào!</p>
+            <p style="font-size:0.85rem; color:#444;" data-i18n="onb_desc">Bạn được cấp số vốn $2,500. Hãy đặt tên Shop và bắt đầu khởi nghiệp nào!</p>
             
             <div style="display:flex; flex-direction:column; gap:10px; text-align:left; margin:10px 0;">
                 <div>
@@ -1066,7 +1066,7 @@
                 set_backup: "💾 Sao Lưu Tiến Trình", set_backup_desc: "Khi mở file game mới (cập nhật code), save cũ sẽ KHÔNG tự chuyển sang. Hãy xuất mã save trước, rồi nạp lại mã đó ở file mới để giữ tiến trình.", set_export_btn: "📤 Xuất Mã Save", set_import_btn: "📥 Nạp Mã Save",
                 backup_title: "💾 Sao Lưu / Khôi Phục Tiến Trình", backup_export_hint: "Bấm \"Xuất mã\" rồi sao chép đoạn mã bên dưới, lưu lại (VD: gửi cho chính mình qua Notes/Zalo) để dùng cho file game mới.", backup_import_hint: "Dán đoạn mã save đã lưu vào ô bên dưới rồi bấm \"Nạp mã\".", backup_export_btn: "📤 Xuất Mã Từ Game Hiện Tại", backup_copy_btn: "📋 Sao Chép Mã", backup_import_btn: "📥 Nạp Mã Vào Game", backup_close: "Đóng", backup_placeholder: "Mã save sẽ hiện ở đây sau khi bấm Xuất mã, hoặc dán mã đã lưu vào đây để Nạp lại...",
                 backup_exported: "✅ Đã tạo mã save, bấm Sao chép để lưu lại!", backup_copied: "✅ Đã sao chép mã save!", backup_copy_fail: "❌ Không tự sao chép được, hãy bôi đen & copy thủ công.", backup_import_empty: "❌ Hãy dán mã save vào ô trước đã!", backup_import_invalid: "❌ Mã save không hợp lệ, kiểm tra lại nhé!", backup_import_confirm: "⚠️ Nạp mã này sẽ GHI ĐÈ tiến trình hiện tại. Tiếp tục?", backup_import_ok: "✅ Đã khôi phục tiến trình thành công!",
-                onb_title: "Chào Mừng Boss GenZ!", onb_desc: "Bạn được cấp số vốn $5,000. Hãy đặt tên Shop và bắt đầu khởi nghiệp nào!", onb_shop: "🏪 Tên Cửa Hàng:", onb_boss: "😎 Tên Của Boss:", onb_btn: "🔥 MỞ CỬA KINH DOANH!",
+                onb_title: "Chào Mừng Boss GenZ!", onb_desc: "Bạn được cấp số vốn $2,500. Hãy đặt tên Shop và bắt đầu khởi nghiệp nào!", onb_shop: "🏪 Tên Cửa Hàng:", onb_boss: "😎 Tên Của Boss:", onb_btn: "🔥 MỞ CỬA KINH DOANH!",
                 eod_rev: "💵 Tiền Kiếm Được:", eod_exp: "🛒 Chi Mua Đồ:", eod_net: "📈 Lợi Nhuận:", eod_served: "💻 Khách Đã Phục Vụ:", eod_saved: "✅ Hệ thống đã tự động lưu tiến trình!", eod_next: "☀️ Bắt Đầu Ngày Mới (06:00 AM)",
                 del_title: "🚀 Giao Hàng Cho Khách", del_desc: "Chọn khách hàng để bàn giao bộ PC này:", del_cancel: "Hủy / Đóng",
                 dyn_locked: "🔒 Yêu Cầu Lv.", dyn_buy: "Mua", dyn_locked_btn: "Khóa", dyn_mount: "Ráp", dyn_unmount: "Gỡ", dyn_deliver: "Giao Hàng",
@@ -1086,7 +1086,7 @@
                 set_backup: "💾 Backup Progress", set_backup_desc: "Opening a new/updated game file will NOT automatically carry over your old save. Export your save code first, then import it in the new file to keep your progress.", set_export_btn: "📤 Export Save Code", set_import_btn: "📥 Import Save Code",
                 backup_title: "💾 Backup / Restore Progress", backup_export_hint: "Tap \"Export\" then copy the code below and keep it somewhere (e.g. send it to yourself via Notes) so you can use it in the new game file.", backup_import_hint: "Paste your saved code into the box below, then tap \"Import\".", backup_export_btn: "📤 Export From Current Game", backup_copy_btn: "📋 Copy Code", backup_import_btn: "📥 Import Into Game", backup_close: "Close", backup_placeholder: "Save code will appear here after Export, or paste a saved code here to Import...",
                 backup_exported: "✅ Save code generated, tap Copy to save it!", backup_copied: "✅ Save code copied!", backup_copy_fail: "❌ Couldn't auto-copy, please select & copy manually.", backup_import_empty: "❌ Please paste a save code first!", backup_import_invalid: "❌ Invalid save code, please check it!", backup_import_confirm: "⚠️ Importing this will OVERWRITE your current progress. Continue?", backup_import_ok: "✅ Progress restored successfully!",
-                onb_title: "Welcome Boss!", onb_desc: "You have a starting capital of $5,000. Name your shop and start building!", onb_shop: "🏪 Shop Name:", onb_boss: "😎 Manager Name:", onb_btn: "🔥 OPEN FOR BUSINESS!",
+                onb_title: "Welcome Boss!", onb_desc: "You have a starting capital of $2,500. Name your shop and start building!", onb_shop: "🏪 Shop Name:", onb_boss: "😎 Manager Name:", onb_btn: "🔥 OPEN FOR BUSINESS!",
                 eod_rev: "💵 Revenue Earned:", eod_exp: "🛒 Hardware Costs:", eod_net: "📈 Net Profit:", eod_served: "💻 Clients Served:", eod_saved: "✅ Progress auto-saved!", eod_next: "☀️ Start Next Day (06:00 AM)",
                 del_title: "🚀 Deliver PC", del_desc: "Select a client to deliver this PC:", del_cancel: "Cancel / Close",
                 dyn_locked: "🔒 Requires Lv.", dyn_buy: "Buy", dyn_locked_btn: "Locked", dyn_mount: "Mount", dyn_unmount: "Unmount", dyn_deliver: "Deliver",
@@ -1106,7 +1106,7 @@
                 set_backup: "💾 备份进度", set_backup_desc: "打开新的/更新后的游戏文件不会自动带入旧存档。请先导出存档代码，再到新文件里导入，以保留进度。", set_export_btn: "📤 导出存档代码", set_import_btn: "📥 导入存档代码",
                 backup_title: "💾 备份 / 恢复进度", backup_export_hint: "点击“导出”，然后复制下方代码并保存好（例如发送到备忘录），以便在新文件中使用。", backup_import_hint: "将保存的代码粘贴到下方输入框，然后点击“导入”。", backup_export_btn: "📤 从当前游戏导出", backup_copy_btn: "📋 复制代码", backup_import_btn: "📥 导入到游戏", backup_close: "关闭", backup_placeholder: "点击导出后代码会显示在这里，或粘贴已保存的代码进行导入...",
                 backup_exported: "✅ 已生成存档代码，点击复制保存！", backup_copied: "✅ 存档代码已复制！", backup_copy_fail: "❌ 自动复制失败，请手动选中并复制。", backup_import_empty: "❌ 请先粘贴存档代码！", backup_import_invalid: "❌ 存档代码无效，请检查！", backup_import_confirm: "⚠️ 导入将覆盖当前进度，确定继续吗？", backup_import_ok: "✅ 进度已成功恢复！",
-                onb_title: "欢迎老板！", onb_desc: "你有 $5,000 的启动资金。请命名你的商店并开始营业！", onb_shop: "🏪 商店名称:", onb_boss: "😎 老板名称:", onb_btn: "🔥 开始营业！",
+                onb_title: "欢迎老板！", onb_desc: "你有 $2,500 的启动资金。请命名你的商店并开始营业！", onb_shop: "🏪 商店名称:", onb_boss: "😎 老板名称:", onb_btn: "🔥 开始营业！",
                 eod_rev: "💵 收入:", eod_exp: "🛒 硬件支出:", eod_net: "📈 净利润:", eod_served: "💻 服务的客户:", eod_saved: "✅ 进度已自动保存！", eod_next: "☀️ 开始新的一天 (06:00 AM)",
                 del_title: "🚀 交付电脑", del_desc: "选择客户来交付这台电脑:", del_cancel: "取消 / 关闭",
                 dyn_locked: "🔒 需要等级 ", dyn_buy: "购买", dyn_locked_btn: "锁定", dyn_mount: "组装", dyn_unmount: "拆卸", dyn_deliver: "交付",
@@ -1271,7 +1271,7 @@
             shopName: "Cyber Rig Store",
             managerName: "Bro GenZ",
             isFirstTime: true,
-            cash: 5000,
+            cash: 2500,
             level: 1,
             xp: 0,
             day: 1,
@@ -1285,7 +1285,9 @@
             todayServedClients: 0,
             todaySpawnedClients: 0,
             dailyNote: "",
-            dailyStats: { revenue: 0, expenses: 0, builds: 0 }
+            dailyStats: { revenue: 0, expenses: 0, builds: 0 },
+            foundLogoEgg: false,
+            foundKonami: false
         };
 
         let gameState = {};
@@ -1535,7 +1537,7 @@
             closeModal('modal-onboarding');
             saveGame();
             renderHeader();
-            showToast("🚀 $5000!");
+            showToast("🚀 $2,500!");
         }
 
         function startClock() {
@@ -2100,6 +2102,134 @@
             container.appendChild(toast);
             setTimeout(() => toast.remove(), 2500);
         }
+
+        // ============================================================
+        // 🥚 EASTER EGGS ẨN — mêm Việt Nam & thế giới
+        // Egg 1: Bấm liên tiếp icon 🏪 trên header (nhanh tay, đừng chậm quá!)
+        // Egg 2: Konami Code kinh điển — gõ bằng bàn phím (PC) hoặc vuốt/chạm (mobile)
+        // ============================================================
+        const MEME_EGGS_VN = [
+            "🔮 Đúng nhận, sai cãi!",
+            "🤨 Ủa alo? Sao kỳ vậy ta?",
+            "😌 Sương sương thôi, đừng lo!",
+            "🎫 1 vé đi tuổi thơ, quay lại thời chưa nợ nần nha boss!",
+            "✨ Còn xỉu... chưa? Xỉu lên bạn ơi!",
+            "🐊 Chằm Zn... trốn đâu cho khỏi shop này!",
+            "😤 Nay mệt mỏi ghê, mà vẫn phải lắp máy thôi.",
+            "📢 Chú ơi cho con hỏi... máy này chạy được Liên Quân không?",
+            "🍜 Đói bụng chưa boss, hay là làm tô mì gõ đã?"
+        ];
+        const MEME_EGGS_WORLD = [
+            "📈 STONKS! Cổ phiếu Shop bạn vừa tăng vọt trong tâm trí.",
+            "🧢 No cap, bạn vừa tìm ra bí mật của Shop!",
+            "🐸 It's Wednesday my dudes.",
+            "🔥🐶 This is fine. Mọi thứ đều ổn (không hề ổn).",
+            "😏 Gotcha! Bạn vừa tự Rickroll chính mình rồi đó.",
+            "🗿 Sigma grindset: build máy 24/7 không nghỉ.",
+            "🚽 Skibidi vibes detected in the workshop.",
+            "🗺️ Đây là... Ohio moment thực thụ.",
+            "🔴 Khi impostor chính là... đơn hàng bị lỗ hôm nay."
+        ];
+
+        let eggClickCount = 0;
+        let eggClickTimer = null;
+
+        function triggerLogoEgg() {
+            eggClickCount++;
+            clearTimeout(eggClickTimer);
+            eggClickTimer = setTimeout(() => { eggClickCount = 0; }, 1500); // gõ chậm quá thì reset
+
+            if (eggClickCount < 7) return; // phải bấm đủ nhanh & đủ 7 lần mới lộ bí mật
+
+            eggClickCount = 0;
+            const pool = Math.random() < 0.5 ? MEME_EGGS_VN : MEME_EGGS_WORLD;
+            const msg = pool[Math.floor(Math.random() * pool.length)];
+
+            if (!gameState.foundLogoEgg) {
+                gameState.foundLogoEgg = true;
+                gameState.cash += 100;
+                renderHeader();
+                saveGame(true);
+                showToast("🥚 EASTER EGG! " + msg + " (+$100 tiền húp mì)");
+            } else {
+                showToast("🥚 " + msg);
+            }
+        }
+
+        // Konami Code kinh điển: ↑ ↑ ↓ ↓ ← → ← → B A
+        // Dùng chung 1 bộ "ký hiệu" trừu tượng (up/down/left/right/tap) để nhận cả:
+        //  - PC: phím mũi tên + phím B, A
+        //  - Mobile: vuốt lên/xuống/trái/phải + 2 cái chạm nhẹ (tap) cuối cùng
+        const KONAMI_SEQUENCE = ['up', 'up', 'down', 'down', 'left', 'right', 'left', 'right', 'tap', 'tap'];
+        let konamiProgress = 0;
+
+        function konamiTriggerReward() {
+            const bonus = gameState.foundKonami ? 0 : 500;
+            gameState.foundKonami = true;
+            if (bonus > 0) {
+                gameState.cash += bonus;
+                renderHeader();
+                saveGame(true);
+            }
+            showToast(`🎮 KONAMI CODE! 30 mạng miễn phí đã kích hoạt${bonus > 0 ? ' (+$' + bonus + ')' : ''}!`);
+        }
+
+        function konamiStep(symbol) {
+            const expected = KONAMI_SEQUENCE[konamiProgress];
+            if (symbol === expected) {
+                konamiProgress++;
+                if (konamiProgress === KONAMI_SEQUENCE.length) {
+                    konamiProgress = 0;
+                    konamiTriggerReward();
+                }
+            } else {
+                konamiProgress = (symbol === KONAMI_SEQUENCE[0]) ? 1 : 0;
+            }
+        }
+
+        // --- Nhận trên PC: phím mũi tên + B/A ---
+        const KONAMI_KEY_MAP = {
+            'ArrowUp': 'up', 'ArrowDown': 'down', 'ArrowLeft': 'left', 'ArrowRight': 'right',
+            'b': 'tap', 'B': 'tap', 'a': 'tap', 'A': 'tap'
+        };
+        document.addEventListener('keydown', (event) => {
+            const symbol = KONAMI_KEY_MAP[event.key];
+            if (symbol) konamiStep(symbol);
+        });
+
+        // --- Nhận trên Mobile: vuốt 4 hướng + 2 cái chạm nhẹ cuối ---
+        (function () {
+            const SWIPE_MIN_DISTANCE = 40;   // px, tối thiểu để tính là 1 cú vuốt
+            const TAP_MAX_DISTANCE = 12;     // px, tối đa để tính là 1 cái chạm (không vuốt)
+            const TAP_MAX_DURATION = 350;    // ms, chạm nhanh mới tính là tap
+            let touchStartX = 0, touchStartY = 0, touchStartTime = 0;
+
+            document.addEventListener('touchstart', (event) => {
+                if (!event.touches || event.touches.length !== 1) return;
+                touchStartX = event.touches[0].clientX;
+                touchStartY = event.touches[0].clientY;
+                touchStartTime = Date.now();
+            }, { passive: true });
+
+            document.addEventListener('touchend', (event) => {
+                const touch = event.changedTouches && event.changedTouches[0];
+                if (!touch) return;
+                const dx = touch.clientX - touchStartX;
+                const dy = touch.clientY - touchStartY;
+                const dist = Math.hypot(dx, dy);
+                const duration = Date.now() - touchStartTime;
+
+                let symbol = null;
+                if (dist <= TAP_MAX_DISTANCE && duration <= TAP_MAX_DURATION) {
+                    symbol = 'tap';
+                } else if (dist >= SWIPE_MIN_DISTANCE) {
+                    symbol = Math.abs(dx) > Math.abs(dy)
+                        ? (dx > 0 ? 'right' : 'left')
+                        : (dy > 0 ? 'down' : 'up');
+                }
+                if (symbol) konamiStep(symbol);
+            }, { passive: true });
+        })();
 
         document.addEventListener('keydown', (event) => {
             if (event.key !== 'Enter' || !event.ctrlKey) return;
