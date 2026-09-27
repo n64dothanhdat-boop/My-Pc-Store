@@ -505,6 +505,114 @@
         }
         .quick-reply-btn:active { transform: translateY(1px); }
 
+        .startup-language-grid {
+            display:grid;
+            grid-template-columns:repeat(3, minmax(0, 1fr));
+            gap:10px;
+            margin-top:14px;
+        }
+        .startup-lang-btn {
+            position:relative;
+            background:white;
+            border:2px solid var(--dark);
+            border-radius:10px;
+            box-shadow:3px 3px 0 var(--dark);
+            padding:13px 8px;
+            cursor:pointer;
+            font-family:'Lexend', sans-serif;
+            font-weight:800;
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            justify-content:center;
+            gap:7px;
+            font-size:1.65rem;
+            min-height:96px;
+            transition:all .12s ease;
+            touch-action:manipulation;
+        }
+        .startup-lang-btn span { font-size:.75rem; }
+        .startup-lang-btn:hover {
+            transform:translate(-1px,-1px);
+            background:var(--yellow);
+            box-shadow:5px 5px 0 var(--dark);
+        }
+        .startup-lang-btn:active {
+            transform:translate(2px,2px);
+            box-shadow:1px 1px 0 var(--dark);
+        }
+        .startup-lang-btn.selected {
+            background:var(--yellow);
+            outline:3px solid var(--purple);
+            outline-offset:2px;
+            transform:translate(-1px,-1px);
+            box-shadow:5px 5px 0 var(--dark);
+        }
+        .startup-lang-btn.selected::after {
+            content:'✓';
+            position:absolute;
+            top:6px;
+            right:8px;
+            width:24px;
+            height:24px;
+            border:2px solid var(--dark);
+            border-radius:50%;
+            background:var(--green);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            font-size:0.82rem;
+            color:var(--dark);
+        }
+        .startup-confirm-btn {
+            width:100%;
+            margin-top:14px;
+            min-height:48px;
+            font-size:0.95rem;
+            touch-action:manipulation;
+        }
+
+        /* MOBILE / DESKTOP RESPONSIVE TUNING */
+        @media (max-width: 900px) {
+            body { padding:8px; }
+            header { grid-template-columns:repeat(2, minmax(0, 1fr)); }
+            .modal-overlay { padding:10px; align-items:center; }
+            .modal-body {
+                max-height:calc(100dvh - 20px);
+                overflow-y:auto;
+                -webkit-overflow-scrolling:touch;
+            }
+            .nb-btn { min-height:44px; }
+            .nb-input, .reply-textarea { font-size:16px !important; }
+            .startup-language-grid { grid-template-columns:repeat(3, minmax(0, 1fr)); }
+        }
+
+        @media (max-width: 560px) {
+            .startup-language-grid { grid-template-columns:1fr; gap:9px; }
+            .startup-lang-btn {
+                flex-direction:row;
+                justify-content:flex-start;
+                padding:11px 14px;
+                min-height:58px;
+                font-size:1.35rem;
+            }
+            .startup-lang-btn span { font-size:.82rem; }
+            .startup-lang-btn.selected::after {
+                top:50%;
+                right:12px;
+                transform:translateY(-50%);
+            }
+            .header-stat { padding:8px; }
+            .stat-value { font-size:.82rem; }
+            nav .tab-btn { min-width:125px; min-height:44px; }
+        }
+
+        @media (max-width: 380px) {
+            header { grid-template-columns:1fr; }
+            body { padding:6px; }
+            .modal-body { padding:15px; }
+        }
+
         /* MODALS */
         .modal-overlay {
             position: fixed;
@@ -733,6 +841,24 @@
         </div>
     </div>
 
+    <!-- STARTUP LANGUAGE MODAL -->
+    <div id="modal-startup-language" class="modal-overlay active">
+        <div class="modal-body" style="text-align:center; max-width:430px;">
+            <div style="font-size:3rem;">🌐✨</div>
+            <h2 style="color:var(--purple); font-size:1.45rem;" data-i18n="lang_start_title">Chọn ngôn ngữ</h2>
+            <p style="font-size:0.85rem; color:#444; line-height:1.45;" data-i18n="lang_start_desc">Chọn ngôn ngữ trước khi bắt đầu mở cửa hàng.</p>
+
+            <div class="startup-language-grid">
+                <button id="startup-lang-vi" class="startup-lang-btn" type="button" onclick="selectStartupLanguage('vi')">🇻🇳<span>Tiếng Việt</span></button>
+                <button id="startup-lang-en" class="startup-lang-btn" type="button" onclick="selectStartupLanguage('en')">🇺🇸<span>English</span></button>
+                <button id="startup-lang-zh" class="startup-lang-btn" type="button" onclick="selectStartupLanguage('zh')">🇨🇳<span>中文</span></button>
+            </div>
+            <div id="startup-language-selected" style="margin-top:10px; font-size:0.78rem; color:#444; font-weight:800; min-height:18px;"></div>
+            <div style="margin-top:5px; font-size:0.72rem; color:#666; font-weight:700;" data-i18n="lang_start_hint">Ngôn ngữ này sẽ được lưu cho lần chơi sau.</div>
+            <button id="startup-language-confirm" class="nb-btn nb-btn-green startup-confirm-btn" type="button" onclick="confirmStartupLanguage()" data-i18n="lang_start_confirm">✅ Chấp nhận & Tiếp tục</button>
+        </div>
+    </div>
+
     <!-- ONBOARDING MODAL -->
     <div id="modal-onboarding" class="modal-overlay">
         <div class="modal-body" style="text-align: center;">
@@ -801,6 +927,7 @@
         // --- I18N DICTIONARY ---
         const I18N = {
             vi: {
+                lang_start_title: "🌐 Chọn ngôn ngữ", lang_start_desc: "Chọn ngôn ngữ trước khi đặt tên quán và bắt đầu chơi.", lang_start_hint: "Ngôn ngữ này sẽ được lưu cho lần chơi sau.", lang_start_confirm: "✅ Chấp nhận & Tiếp tục", lang_start_selected: "Đã chọn: ",
                 ui_shop: "Cửa Hàng", ui_boss: "Chủ Shop", ui_cash: "Vốn (Cash)", ui_day: "Ngày", ui_clock: "Giờ Làm", ui_clients: "Khách Hôm Nay",
                 ui_daily_note: "Ghi chú hôm nay (Lưu tự động):", ui_note_ph: "Ghi chép linh kiện cần mua, khách Vip, kế hoạch...", ui_btn_save: "💾 Lưu",
                 tab_market: "🛒 Chợ Linh Kiện", tab_workbench: "🛠️ Lắp Ráp", tab_orders: "📋 Khách Đặt", tab_reviews: "💬 Đánh Giá", tab_settings: "⚙️ Hệ Thống",
@@ -817,6 +944,7 @@
                 msg_lvl_up: "🎉 CHÚC MỪNG! BẠN ĐÃ LÊN CẤP", msg_lock: "❌ Level chưa đủ để mua món này!", msg_money: "❌ Không đủ tiền trong tài khoản!", msg_bought: "🛒 Đã mua", msg_missing: "❌ Lắp chưa xong! Đang thiếu:", msg_no_order: "❌ Hiện chưa có đơn đặt hàng nào!", msg_sold: "💰 ĐÃ BÁN! NHẬN"
             },
             en: {
+                lang_start_title: "🌐 Choose Language", lang_start_desc: "Choose your language before naming your shop and starting the game.", lang_start_hint: "Your choice will be saved for your next session.", lang_start_confirm: "✅ Accept & Continue", lang_start_selected: "Selected: ",
                 ui_shop: "Store", ui_boss: "Manager", ui_cash: "Cash", ui_day: "Day", ui_clock: "Working Hours", ui_clients: "Today's Clients",
                 ui_daily_note: "Today's Note (Auto-save):", ui_note_ph: "Write down parts to buy, VIP plans...", ui_btn_save: "💾 Save",
                 tab_market: "🛒 Market", tab_workbench: "🛠️ Workbench", tab_orders: "📋 Orders", tab_reviews: "💬 Reviews", tab_settings: "⚙️ Settings",
@@ -833,6 +961,7 @@
                 msg_lvl_up: "🎉 CONGRATS! YOU REACHED LEVEL", msg_lock: "❌ Level too low to buy this!", msg_money: "❌ Not enough cash!", msg_bought: "🛒 Bought", msg_missing: "❌ Incomplete build! Missing:", msg_no_order: "❌ No active orders right now!", msg_sold: "💰 SOLD! RECEIVED"
             },
             zh: {
+                lang_start_title: "🌐 选择语言", lang_start_desc: "请先选择语言，再设置商店名称并开始游戏。", lang_start_hint: "该选择会保存到下一次游戏。", lang_start_confirm: "✅ 确认并继续", lang_start_selected: "已选择：",
                 ui_shop: "商店", ui_boss: "老板", ui_cash: "资金", ui_day: "天数", ui_clock: "营业时间", ui_clients: "今日客户",
                 ui_daily_note: "今日备忘录 (自动保存):", ui_note_ph: "记录需要购买的零件，计划...", ui_btn_save: "💾 保存",
                 tab_market: "🛒 零件市场", tab_workbench: "🛠️ 组装台", tab_orders: "📋 客户订单", tab_reviews: "💬 评价", tab_settings: "⚙️ 系统设置",
@@ -1002,6 +1131,7 @@
 
         const DEFAULT_STATE = {
             language: 'vi', // ADDED LANGUAGE STATE
+            languageConfirmed: false,
             shopName: "Cyber Rig Store",
             managerName: "Bro GenZ",
             isFirstTime: true,
@@ -1025,6 +1155,7 @@
         let gameState = {};
         let currentMarketCat = 'CPU';
         let timerInterval = null;
+        let pendingStartupLanguage = 'vi';
 
         function getRandomDailyQuota() {
             return Math.floor(Math.random() * 6) + 5;
@@ -1042,8 +1173,19 @@
             document.getElementById('lang-select').value = gameState.language || 'vi';
             applyTranslations();
 
+            // New game flow: Language -> Shop/Boss name -> Game
             if (gameState.isFirstTime) {
-                openModal('modal-onboarding');
+                if (gameState.languageConfirmed) {
+                    closeModal('modal-startup-language');
+                    openModal('modal-onboarding');
+                } else {
+                    closeModal('modal-onboarding');
+                    pendingStartupLanguage = gameState.language || 'vi';
+                    openModal('modal-startup-language');
+                    updateStartupLanguageUI();
+                }
+            } else {
+                closeModal('modal-startup-language');
             }
 
             checkLevelUp();
@@ -1068,6 +1210,10 @@
                     if (!gameState.level) gameState.level = 1;
                     if (!gameState.xp) gameState.xp = 0;
                     if (!gameState.language) gameState.language = 'vi';
+                    // Migration for older saves: completed games skip startup language; unfinished games must choose it first.
+                    if (typeof gameState.languageConfirmed !== 'boolean') {
+                        gameState.languageConfirmed = !gameState.isFirstTime;
+                    }
                     if (!gameState.dailyQuota) gameState.dailyQuota = getRandomDailyQuota();
                     if (!Array.isArray(gameState.reviews)) gameState.reviews = [];
                     gameState.reviews = gameState.reviews.map(r => ({ ...r, reply: typeof r.reply === 'string' ? r.reply : '', replyAt: r.replyAt || null }));
@@ -1113,6 +1259,57 @@
             if (input && gameState.dailyNote !== undefined) {
                 input.value = gameState.dailyNote;
             }
+        }
+
+        function selectStartupLanguage(lang) {
+            if (!I18N[lang]) lang = 'vi';
+            pendingStartupLanguage = lang;
+            gameState.language = lang;
+
+            const select = document.getElementById('lang-select');
+            if (select) select.value = lang;
+
+            applyTranslations();
+            updateStartupLanguageUI();
+        }
+
+        function updateStartupLanguageUI() {
+            const lang = pendingStartupLanguage || 'vi';
+            ['vi','en','zh'].forEach(code => {
+                const btn = document.getElementById('startup-lang-' + code);
+                if (btn) btn.classList.toggle('selected', code === lang);
+            });
+
+            const confirmBtn = document.getElementById('startup-language-confirm');
+            if (confirmBtn) {
+                confirmBtn.disabled = false;
+                confirmBtn.innerHTML = t('lang_start_confirm');
+            }
+
+            const selected = document.getElementById('startup-language-selected');
+            if (selected) {
+                if (lang) {
+                    const names = { vi:'Tiếng Việt', en:'English', zh:'中文' };
+                    selected.textContent = t('lang_start_selected') + names[lang];
+                } else {
+                    selected.textContent = '';
+                }
+            }
+        }
+
+        function confirmStartupLanguage() {
+            if (!pendingStartupLanguage || !I18N[pendingStartupLanguage]) pendingStartupLanguage = 'vi';
+
+            gameState.language = pendingStartupLanguage;
+            gameState.languageConfirmed = true;
+            saveGame(true);
+
+            const select = document.getElementById('lang-select');
+            if (select) select.value = gameState.language;
+
+            applyTranslations();
+            closeModal('modal-startup-language');
+            openModal('modal-onboarding');
         }
 
         function submitOnboarding() {
