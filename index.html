@@ -12,12 +12,114 @@
     <meta name="apple-mobile-web-app-title" content="PC Tycoon">
     <meta name="theme-color" content="#E2F170">
 
-    <!-- App Icons (custom PC Tycoon logo) -->
-    <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjAwIDIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgcng9IjQwIiBmaWxsPSIjQjUxNzlFIiBzdHJva2U9IiMxRTFFMjQiIHN0cm9rZS13aWR0aD0iOCIvPgogIDxyZWN0IHg9IjM1IiB5PSI0MiIgd2lkdGg9IjEzMCIgaGVpZ2h0PSI5MiIgcng9IjEwIiBmaWxsPSIjNENDOUYwIiBzdHJva2U9IiMxRTFFMjQiIHN0cm9rZS13aWR0aD0iOCIvPgogIDxyZWN0IHg9IjUwIiB5PSI1NiIgd2lkdGg9IjEwMCIgaGVpZ2h0PSI2NCIgcng9IjQiIGZpbGw9IiMxRTFFMjQiLz4KICA8cmVjdCB4PSI2MCIgeT0iNjYiIHdpZHRoPSI1MCIgaGVpZ2h0PSI5IiByeD0iNCIgZmlsbD0iIzA2RDZBMCIvPgogIDxyZWN0IHg9IjYwIiB5PSI4MSIgd2lkdGg9IjgwIiBoZWlnaHQ9IjkiIHJ4PSI0IiBmaWxsPSIjRTJGMTcwIi8+CiAgPHJlY3QgeD0iNjAiIHk9Ijk2IiB3aWR0aD0iMzUiIGhlaWdodD0iOSIgcng9IjQiIGZpbGw9IiNGRjcyOUYiLz4KICA8cmVjdCB4PSI5MCIgeT0iMTM0IiB3aWR0aD0iMjAiIGhlaWdodD0iMTgiIGZpbGw9IiMxRTFFMjQiLz4KICA8cmVjdCB4PSI2OCIgeT0iMTUyIiB3aWR0aD0iNjQiIGhlaWdodD0iMTMiIHJ4PSI2IiBmaWxsPSIjMUUxRTI0IiBzdHJva2U9IiMxRTFFMjQiIHN0cm9rZS13aWR0aD0iMiIvPgogIDxjaXJjbGUgY3g9IjE1MiIgY3k9IjE0OCIgcj0iMzAiIGZpbGw9IiNFMkYxNzAiIHN0cm9rZT0iIzFFMUUyNCIgc3Ryb2tlLXdpZHRoPSI4Ii8+CiAgPHRleHQgeD0iMTUyIiB5PSIxNTkiIGZvbnQtZmFtaWx5PSJBcmlhbCwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjMwIiBmb250LXdlaWdodD0iOTAwIiBmaWxsPSIjMUUxRTI0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj4kPC90ZXh0Pgo8L3N2Zz4K">
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMjAwIDIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgcng9IjQwIiBmaWxsPSIjQjUxNzlFIiBzdHJva2U9IiMxRTFFMjQiIHN0cm9rZS13aWR0aD0iOCIvPgogIDxyZWN0IHg9IjM1IiB5PSI0MiIgd2lkdGg9IjEzMCIgaGVpZ2h0PSI5MiIgcng9IjEwIiBmaWxsPSIjNENDOUYwIiBzdHJva2U9IiMxRTFFMjQiIHN0cm9rZS13aWR0aD0iOCIvPgogIDxyZWN0IHg9IjUwIiB5PSI1NiIgd2lkdGg9IjEwMCIgaGVpZ2h0PSI2NCIgcng9IjQiIGZpbGw9IiMxRTFFMjQiLz4KICA8cmVjdCB4PSI2MCIgeT0iNjYiIHdpZHRoPSI1MCIgaGVpZ2h0PSI5IiByeD0iNCIgZmlsbD0iIzA2RDZBMCIvPgogIDxyZWN0IHg9IjYwIiB5PSI4MSIgd2lkdGg9IjgwIiBoZWlnaHQ9IjkiIHJ4PSI0IiBmaWxsPSIjRTJGMTcwIi8+CiAgPHJlY3QgeD0iNjAiIHk9Ijk2IiB3aWR0aD0iMzUiIGhlaWdodD0iOSIgcng9IjQiIGZpbGw9IiNGRjcyOUYiLz4KICA8cmVjdCB4PSI5MCIgeT0iMTM0IiB3aWR0aD0iMjAiIGhlaWdodD0iMTgiIGZpbGw9IiMxRTFFMjQiLz4KICA8cmVjdCB4PSI2OCIgeT0iMTUyIiB3aWR0aD0iNjQiIGhlaWdodD0iMTMiIHJ4PSI2IiBmaWxsPSIjMUUxRTI0IiBzdHJva2U9IiMxRTFFMjQiIHN0cm9rZS13aWR0aD0iMiIvPgogIDxjaXJjbGUgY3g9IjE1MiIgY3k9IjE0OCIgcj0iMzAiIGZpbGw9IiNFMkYxNzAiIHN0cm9rZT0iIzFFMUUyNCIgc3Ryb2tlLXdpZHRoPSI4Ii8+CiAgPHRleHQgeD0iMTUyIiB5PSIxNTkiIGZvbnQtZmFtaWx5PSJBcmlhbCwgSGVsdmV0aWNhLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjMwIiBmb250LXdlaWdodD0iOTAwIiBmaWxsPSIjMUUxRTI0IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIj4kPC90ZXh0Pgo8L3N2Zz4K">
+    <!-- App Icons: được VẼ BẰNG CODE (canvas) ngay khi trang tải, không nhúng file ảnh -->
+    <link id="icon-apple-touch" rel="apple-touch-icon" sizes="180x180" href="">
+    <link id="icon-favicon" rel="icon" type="image/png" sizes="512x512" href="">
+    <link id="icon-manifest" rel="manifest" href="">
+    <script>
+        // Vẽ logo "PC Tycoon" (màn hình máy tính + huy hiệu $) bằng Canvas 2D,
+        // sau đó gán làm apple-touch-icon / favicon / manifest icon.
+        // Ưu điểm: không cần nhúng file ảnh nhị phân, toàn bộ logo là CODE thuần.
+        (function () {
+            function roundRectPath(ctx, x, y, w, h, r) {
+                ctx.beginPath();
+                ctx.moveTo(x + r, y);
+                ctx.arcTo(x + w, y, x + w, y + h, r);
+                ctx.arcTo(x + w, y + h, x, y + h, r);
+                ctx.arcTo(x, y + h, x, y, r);
+                ctx.arcTo(x, y, x + w, y, r);
+                ctx.closePath();
+            }
 
-    <!-- Web App Manifest -->
-    <link rel="manifest" href="data:application/manifest+json;base64,eyJuYW1lIjogIlBDIEJ1aWxkaW5nIFN0b3JlIFR5Y29vbiIsICJzaG9ydF9uYW1lIjogIlBDIFR5Y29vbiIsICJzdGFydF91cmwiOiAiLiIsICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLCAiYmFja2dyb3VuZF9jb2xvciI6ICIjRjhGOUZBIiwgInRoZW1lX2NvbG9yIjogIiNFMkYxNzAiLCAiaWNvbnMiOiBbeyJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sO2Jhc2U2NCxQSE4yWnlCMmFXVjNRbTk0UFNJd0lEQWdNakF3SURJd01DSWdlRzFzYm5NOUltaDBkSEE2THk5M2QzY3Vkek11YjNKbkx6SXdNREF2YzNabklqNEtJQ0E4Y21WamRDQjNhV1IwYUQwaU1qQXdJaUJvWldsbmFIUTlJakl3TUNJZ2NuZzlJalF3SWlCbWFXeHNQU0lqUWpVeE56bEZJaUJ6ZEhKdmEyVTlJaU14UlRGRk1qUWlJSE4wY205clpTMTNhV1IwYUQwaU9DSXZQZ29nSUR4eVpXTjBJSGc5SWpNMUlpQjVQU0kwTWlJZ2QybGtkR2c5SWpFek1DSWdhR1ZwWjJoMFBTSTVNaUlnY25nOUlqRXdJaUJtYVd4c1BTSWpORU5ET1VZd0lpQnpkSEp2YTJVOUlpTXhSVEZGTWpRaUlITjBjbTlyWlMxM2FXUjBhRDBpT0NJdlBnb2dJRHh5WldOMElIZzlJalV3SWlCNVBTSTFOaUlnZDJsa2RHZzlJakV3TUNJZ2FHVnBaMmgwUFNJMk5DSWdjbmc5SWpRaUlHWnBiR3c5SWlNeFJURkZNalFpTHo0S0lDQThjbVZqZENCNFBTSTJNQ0lnZVQwaU5qWWlJSGRwWkhSb1BTSTFNQ0lnYUdWcFoyaDBQU0k1SWlCeWVEMGlOQ0lnWm1sc2JEMGlJekEyUkRaQk1DSXZQZ29nSUR4eVpXTjBJSGc5SWpZd0lpQjVQU0k0TVNJZ2QybGtkR2c5SWpnd0lpQm9aV2xuYUhROUlqa2lJSEo0UFNJMElpQm1hV3hzUFNJalJUSkdNVGN3SWk4K0NpQWdQSEpsWTNRZ2VEMGlOakFpSUhrOUlqazJJaUIzYVdSMGFEMGlNelVpSUdobGFXZG9kRDBpT1NJZ2NuZzlJalFpSUdacGJHdzlJaU5HUmpjeU9VWWlMejRLSUNBOGNtVmpkQ0I0UFNJNU1DSWdlVDBpTVRNMElpQjNhV1IwYUQwaU1qQWlJR2hsYVdkb2REMGlNVGdpSUdacGJHdzlJaU14UlRGRk1qUWlMejRLSUNBOGNtVmpkQ0I0UFNJMk9DSWdlVDBpTVRVeUlpQjNhV1IwYUQwaU5qUWlJR2hsYVdkb2REMGlNVE1pSUhKNFBTSTJJaUJtYVd4c1BTSWpNVVV4UlRJMElpQnpkSEp2YTJVOUlpTXhSVEZGTWpRaUlITjBjbTlyWlMxM2FXUjBhRDBpTWlJdlBnb2dJRHhqYVhKamJHVWdZM2c5SWpFMU1pSWdZM2s5SWpFME9DSWdjajBpTXpBaUlHWnBiR3c5SWlORk1rWXhOekFpSUhOMGNtOXJaVDBpSXpGRk1VVXlOQ0lnYzNSeWIydGxMWGRwWkhSb1BTSTRJaTgrQ2lBZ1BIUmxlSFFnZUQwaU1UVXlJaUI1UFNJeE5Ua2lJR1p2Ym5RdFptRnRhV3g1UFNKQmNtbGhiQ3dnU0dWc2RtVjBhV05oTENCellXNXpMWE5sY21sbUlpQm1iMjUwTFhOcGVtVTlJak13SWlCbWIyNTBMWGRsYVdkb2REMGlPVEF3SWlCbWFXeHNQU0lqTVVVeFJUSTBJaUIwWlhoMExXRnVZMmh2Y2owaWJXbGtaR3hsSWo0a1BDOTBaWGgwUGdvOEwzTjJaejRLIiwgInNpemVzIjogIjUxMng1MTIiLCAidHlwZSI6ICJpbWFnZS9zdmcreG1sIn1dfQ==">
+            function drawLogo(size) {
+                const canvas = document.createElement('canvas');
+                canvas.width = size;
+                canvas.height = size;
+                const ctx = canvas.getContext('2d');
+                const s = size / 200;
+
+                // Nền tím bo góc + viền đen
+                roundRectPath(ctx, 4 * s, 4 * s, 192 * s, 192 * s, 40 * s);
+                ctx.fillStyle = '#B5179E';
+                ctx.fill();
+                ctx.lineWidth = 8 * s;
+                ctx.strokeStyle = '#1E1E24';
+                ctx.stroke();
+
+                // Màn hình (cyan)
+                roundRectPath(ctx, 35 * s, 42 * s, 130 * s, 92 * s, 10 * s);
+                ctx.fillStyle = '#4CC9F0';
+                ctx.fill();
+                ctx.lineWidth = 8 * s;
+                ctx.strokeStyle = '#1E1E24';
+                ctx.stroke();
+
+                // Màn hình đen bên trong
+                roundRectPath(ctx, 50 * s, 56 * s, 100 * s, 64 * s, 4 * s);
+                ctx.fillStyle = '#1E1E24';
+                ctx.fill();
+
+                // 3 thanh nội dung màu
+                roundRectPath(ctx, 60 * s, 66 * s, 50 * s, 9 * s, 4 * s);
+                ctx.fillStyle = '#06D6A0';
+                ctx.fill();
+                roundRectPath(ctx, 60 * s, 81 * s, 80 * s, 9 * s, 4 * s);
+                ctx.fillStyle = '#E2F170';
+                ctx.fill();
+                roundRectPath(ctx, 60 * s, 96 * s, 35 * s, 9 * s, 4 * s);
+                ctx.fillStyle = '#FF729F';
+                ctx.fill();
+
+                // Chân đế màn hình
+                ctx.fillStyle = '#1E1E24';
+                ctx.fillRect(90 * s, 134 * s, 20 * s, 18 * s);
+                roundRectPath(ctx, 68 * s, 152 * s, 64 * s, 13 * s, 6 * s);
+                ctx.fill();
+
+                // Huy hiệu đồng $ (tycoon)
+                ctx.beginPath();
+                ctx.arc(152 * s, 148 * s, 30 * s, 0, Math.PI * 2);
+                ctx.fillStyle = '#E2F170';
+                ctx.fill();
+                ctx.lineWidth = 8 * s;
+                ctx.strokeStyle = '#1E1E24';
+                ctx.stroke();
+
+                ctx.fillStyle = '#1E1E24';
+                ctx.font = `900 ${30 * s}px Arial, Helvetica, sans-serif`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('$', 152 * s, 150 * s);
+
+                return canvas.toDataURL('image/png');
+            }
+
+            try {
+                const icon180 = drawLogo(180);
+                const icon512 = drawLogo(512);
+
+                document.getElementById('icon-apple-touch').href = icon180;
+                document.getElementById('icon-favicon').href = icon512;
+
+                const manifest = {
+                    name: 'PC Building Store Tycoon',
+                    short_name: 'PC Tycoon',
+                    start_url: '.',
+                    display: 'standalone',
+                    background_color: '#F8F9FA',
+                    theme_color: '#E2F170',
+                    icons: [
+                        { src: icon180, sizes: '180x180', type: 'image/png' },
+                        { src: icon512, sizes: '512x512', type: 'image/png' }
+                    ]
+                };
+                const blob = new Blob([JSON.stringify(manifest)], { type: 'application/manifest+json' });
+                document.getElementById('icon-manifest').href = URL.createObjectURL(blob);
+            } catch (e) {
+                console.error('Không thể tạo icon bằng canvas:', e);
+            }
+        })();
+    </script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
