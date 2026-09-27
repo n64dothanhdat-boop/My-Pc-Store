@@ -1363,8 +1363,13 @@
             const availableRoles = clientTypes.filter(c => c.reqLevel <= gameState.level);
             const type = availableRoles[Math.floor(Math.random() * availableRoles.length)];
 
-            const targetScore = Math.floor(type.baseScore * (0.8 + Math.random() * 0.4));
-            const budget = Math.floor(type.baseBudget * (0.9 + Math.random() * 0.35));
+            // FIX: targetScore và budget từng random độc lập, đôi khi ra tổ hợp
+            // "điểm yêu cầu cao + ngân sách thấp" mà không cấu hình PC nào đáp ứng nổi
+            // (khách yêu cầu PC yếu vẫn bị chấm 2 sao "Low Score" dù build đúng PC rẻ).
+            // Nay budget luôn >= mức chuẩn (baseBudget) và targetScore không vượt quá 1.1x
+            // baseScore, đảm bảo luôn tồn tại ít nhất 1 cấu hình vừa đủ điểm vừa đủ tiền.
+            const targetScore = Math.floor(type.baseScore * (0.85 + Math.random() * 0.25)); // 0.85x - 1.10x
+            const budget = Math.floor(type.baseBudget * (1.0 + Math.random() * 0.3)); // 1.0x - 1.30x
 
             const order = {
                 id: Date.now() + Math.random(),
