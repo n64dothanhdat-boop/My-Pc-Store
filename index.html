@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>PC Building Store Tycoon (GenZ Edition)</title>
+    
+    <!-- PWA Web App Meta Tags & Apple iOS Home Screen Support -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="PC Tycoon">
+    <meta name="theme-color" content="#E2F170">
+
+    <!-- App Icons -->
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%23B5179E'/><text y='.9em' font-size='70' x='10'>💻</text></svg>">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%234CC9F0'/><text y='.9em' font-size='70' x='10'>🖥️</text></svg>">
+
+    <!-- Web App Manifest -->
+    <link rel="manifest" href="data:application/manifest+json;base64,ewogICJuYW1lIjogIlBDIEJ1aWxkaW5nIFN0b3JlIFR5Y29vbiIsCiAgInNob3J0X25hbWUiOiAiUEMgVHljb29uIiwKICAic3RhcnRfdXJsIjogIi4iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiNGOEY5RkEiLAogICJ0aGVtZV9jb2xvciI6ICIjRTJGMTcwIiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiZGF0YTppbWFnZS9zdmcreG1sLDxzdmcgeG1sbnM9J2h0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnJyB2aWV3Qm94PScwIDAgMTAwIDEwMCc+PHJlY3Qgd2lkdGg9JzEwMCcgaGVpZ2h0PScxMDAnIHJ4PScyMCcgZmlsbD0nJTIzQjUxNzlFJy8+PHRleHQgeT0nLjllbScgZm9udC1zaXplPSc3MCcgeD0nMTAnPjBDPC90ZXh0Pjwvc3ZnPiIsCiAgICAgICJzaXplcyI6ICI1MTJ4NTEyIiwKICAgICAgInR5cGUiOiAiaW1hZ2Uvc3ZnK3htbCIKICAgIH0KICBdCn0=">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --pink: #FF729F;
+            --cyan: #4CC9F0;
+            --yellow: #E2F170;
+            --green: #06D6A0;
+            --purple: #B5179E;
+            --dark: #1E1E24;
+            --light: #FFFDF7;
+            --gray: #E5E7EB;
+            --border-width: 2px;
+            --shadow: 3px 3px 0px #1E1E24;
+            --shadow-hover: 5px 5px 0px #1E1E24;
+            --radius: 10px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Lexend', sans-serif;
+            user-select: none;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: #F8F9FA;
+            background-image: radial-gradient(#1E1E24 1px, transparent 1px);
+            background-size: 18px 18px;
+            color: var(--dark);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+            font-size: 0.85rem;
+            padding-bottom: 25px;
+        }
+
+        #app {
+            max-width: 1180px;
+            margin: 0 auto;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .nb-card {
+            background: var(--light);
+            border: var(--border-width) solid var(--dark);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 12px;
+            transition: transform 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .nb-btn {
+            background: var(--cyan);
+            border: var(--border-width) solid var(--dark);
+            border-radius: 8px;
+            box-shadow: 2px 2px 0px var(--dark);
+            padding: 6px 12px;
+            font-weight: 800;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.1s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .nb-btn:hover:not(:disabled) {
+            transform: translate(-1px, -1px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .nb-btn:active:not(:disabled) {
+            transform: translate(1px, 1px);
+            box-shadow: 1px 1px 0px var(--dark);
+        }
+
+        .nb-btn:disabled {
+            background: var(--gray);
+            color: #888;
+            cursor: not-allowed;
+            box-shadow: 2px 2px 0px #888;
+            border-color: #888;
+        }
+
+        .nb-btn-pink { background: var(--pink); }
+        .nb-btn-yellow { background: var(--yellow); }
+        .nb-btn-green { background: var(--green); }
+        .nb-btn-purple { background: var(--purple); color: white; }
+        .nb-btn-dark { background: var(--dark); color: white; }
+
+        .nb-input {
+            border: var(--border-width) solid var(--dark);
+            border-radius: 6px;
+            padding: 8px 10px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            outline: none;
+            box-shadow: 2px 2px 0px var(--dark);
+            background: #fff;
+            width: 100%;
+        }
+
+        .nb-badge {
+            background: var(--yellow);
+            border: 1.5px solid var(--dark);
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 800;
+            display: inline-block;
+        }
+
+        /* HEADER GRID */
+        header {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 8px;
+            background: var(--pink);
+            padding: 10px;
+        }
+
+        .header-stat {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            padding: 6px 10px;
+            border: 2px solid var(--dark);
+            border-radius: 8px;
+            box-shadow: 2px 2px 0px var(--dark);
+        }
+
+        .header-stat .icon { font-size: 1.2rem; }
+        .stat-label { font-size: 0.65rem; font-weight: 700; color: #666; text-transform: uppercase; }
+        .stat-value { font-size: 0.95rem; font-weight: 900; display: flex; align-items: center; gap: 4px; }
+        .editable-name { cursor: pointer; text-decoration: underline dotted var(--dark) 2px; }
+
+        /* XP BAR */
+        .xp-bar-container {
+            width: 100%;
+            height: 10px;
+            background: var(--gray);
+            border: 1.5px solid var(--dark);
+            border-radius: 5px;
+            margin-top: 4px;
+            overflow: hidden;
+        }
+        .xp-bar-fill {
+            height: 100%;
+            background: var(--green);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        /* STICKY NOTE */
+        .sticky-note-card {
+            background: #FFF3BF;
+            border: 2px solid var(--dark);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            padding: 10px 14px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+        }
+
+        .sticky-note-card textarea {
+            flex: 1;
+            background: transparent;
+            border: none;
+            outline: none;
+            font-family: 'Lexend', sans-serif;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #333;
+            resize: none;
+            height: 42px;
+            line-height: 1.3;
+        }
+
+        /* NAVIGATION */
+        nav {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            scrollbar-width: none;
+        }
+        nav::-webkit-scrollbar { display: none; }
+
+        .tab-btn {
+            flex: 1;
+            min-width: 100px;
+            padding: 8px 10px;
+            font-size: 0.85rem;
+            background: white;
+            white-space: nowrap;
+        }
+        .tab-btn.active {
+            background: var(--yellow);
+            transform: translate(-1px, -1px);
+            box-shadow: var(--shadow-hover);
+        }
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; animation: fadeIn 0.2s ease; }
+
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* MARKET UI */
+        .market-layout {
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            gap: 12px;
+        }
+        @media (max-width: 768px) {
+            .market-layout { grid-template-columns: 1fr; }
+        }
+
+        .category-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .cat-btn {
+            text-align: left;
+            background: white;
+            border: 2px solid var(--dark);
+            padding: 8px 10px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            cursor: pointer;
+            box-shadow: 2px 2px 0px var(--dark);
+            transition: all 0.1s;
+        }
+        .cat-btn.active, .cat-btn:hover {
+            background: var(--cyan);
+            transform: translateX(2px);
+        }
+
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 10px;
+        }
+        .item-card {
+            background: white;
+            border: 2px solid var(--dark);
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 2px 2px 0px var(--dark);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            gap: 8px;
+            position: relative;
+        }
+        .item-card.locked {
+            background: #f3f4f6;
+            color: #9ca3af;
+            border-color: #9ca3af;
+            box-shadow: 2px 2px 0px #d1d5db;
+        }
+        .item-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 4px; }
+        .item-title { font-size: 0.8rem; font-weight: 800; line-height: 1.2; }
+        .item-brand { font-size: 0.7rem; color: #666; font-weight: 600; margin-top: 2px; }
+        .item-score { background: var(--yellow); padding: 3px 6px; border-radius: 4px; border: 1px solid var(--dark); font-weight: 800; font-size: 0.7rem; }
+        .locked .item-score { background: #e5e7eb; border-color: #9ca3af; color: #9ca3af; }
+        .lock-overlay {
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(255,255,255,0.7);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 0.9rem;
+            color: #ef4444;
+            border-radius: 6px;
+            z-index: 10;
+        }
+
+        /* WORKBENCH */
+        .workbench-layout {
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 12px;
+        }
+        @media (max-width: 900px) {
+            .workbench-layout { grid-template-columns: 1fr; }
+        }
+        .slots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 10px;
+        }
+        .slot-card {
+            background: white;
+            border: 2px dashed var(--dark);
+            border-radius: 8px;
+            padding: 10px;
+            min-height: 95px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .slot-card.filled {
+            border-style: solid;
+            background: #f0fdf4;
+            border-color: var(--green);
+        }
+        .slot-title { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; color: #666; }
+        .slot-item-name { font-size: 0.8rem; font-weight: 800; margin-top: 4px; line-height: 1.2; }
+
+        .inventory-list {
+            max-height: 320px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding-right: 4px;
+        }
+        .inventory-item {
+            background: white;
+            border: 2px solid var(--dark);
+            border-radius: 6px;
+            padding: 8px 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 2px 2px 0px var(--dark);
+        }
+
+        /* ORDERS */
+        .orders-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 12px;
+        }
+        .order-card {
+            background: white;
+            border: 2px solid var(--dark);
+            border-radius: 10px;
+            padding: 12px;
+            box-shadow: 3px 3px 0px var(--dark);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .client-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid var(--dark);
+            background: var(--cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+        .specs-req {
+            background: #F1F5F9;
+            border: 1.5px solid var(--dark);
+            border-radius: 6px;
+            padding: 8px;
+            font-size: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        /* REVIEWS */
+        .reviews-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        .review-card {
+            background: white;
+            border: 2px solid var(--dark);
+            border-radius: 8px;
+            padding: 10px 12px;
+            box-shadow: 2px 2px 0px var(--dark);
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .stars { color: #FFB703; font-size: 1rem; }
+
+        /* MODALS */
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 15px;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal-body {
+            background: var(--light);
+            border: 3px solid var(--dark);
+            border-radius: 12px;
+            box-shadow: 5px 5px 0px var(--dark);
+            max-width: 450px;
+            width: 100%;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            animation: popIn 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        @keyframes popIn {
+            from { transform: scale(0.8); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+
+        /* TOAST */
+        #toast-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            z-index: 2000;
+        }
+        .toast {
+            background: var(--dark);
+            color: white;
+            border: 2px solid white;
+            padding: 10px 15px;
+            border-radius: 8px;
+            box-shadow: 3px 3px 0px rgba(0,0,0,0.5);
+            font-weight: 700;
+            font-size: 0.85rem;
+            animation: slideIn 0.3s ease;
+        }
+        @keyframes slideIn {
+            from { transform: translateX(120%); }
+            to { transform: translateX(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app">
+        <!-- HEADER -->
+        <header class="nb-card">
+            <div class="header-stat">
+                <span class="icon">🏪</span>
+                <div style="flex: 1;">
+                    <div class="stat-label">Cửa Hàng</div>
+                    <div class="stat-value"><span id="display-shop-name" class="editable-name" onclick="editShopName()">Cyber Rig</span> ✏️</div>
+                </div>
+            </div>
+            <div class="header-stat">
+                <span class="icon">👑</span>
+                <div style="flex: 1;">
+                    <div class="stat-label">Chủ Shop | <span id="display-level" style="color:var(--purple); font-weight:900;">Lv.1</span></div>
+                    <div class="stat-value"><span id="display-manager-name" class="editable-name" onclick="editManagerName()">GenZ Bro</span> ✏️</div>
+                    <div class="xp-bar-container" title="Kinh Nghiệm">
+                        <div id="xp-bar" class="xp-bar-fill"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="header-stat">
+                <span class="icon">💰</span>
+                <div style="flex: 1;">
+                    <div class="stat-label">Vốn (Cash)</div>
+                    <div class="stat-value" id="display-cash" style="color: #059669;">$5,000</div>
+                </div>
+            </div>
+            <div class="header-stat">
+                <span class="icon">📅</span>
+                <div style="flex: 1;">
+                    <div class="stat-label">Ngày</div>
+                    <div class="stat-value" id="display-day">Ngày 1</div>
+                </div>
+            </div>
+            <div class="header-stat">
+                <span class="icon">⏰</span>
+                <div style="flex: 1;">
+                    <div class="stat-label">Giờ Làm</div>
+                    <div class="stat-value" id="display-clock" style="color: #d97706;">06:00 AM</div>
+                </div>
+            </div>
+            <div class="header-stat">
+                <span class="icon">👥</span>
+                <div style="flex: 1;">
+                    <div class="stat-label">Khách Hôm Nay</div>
+                    <div class="stat-value" id="display-today-clients" style="color: #B5179E;">0 / 5</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- DAILY STICKY NOTE WIDGET -->
+        <div class="sticky-note-card">
+            <span style="font-size: 1.5rem;">📌</span>
+            <div style="display:flex; flex-direction:column; flex:1;">
+                <div style="font-size: 0.7rem; font-weight: 900; text-transform: uppercase; color: #854d0e;">Ghi chú hôm nay (Lưu tự động):</div>
+                <textarea id="daily-note-input" placeholder="Ghi chép linh kiện cần mua, khách Vip, kế hoạch..." onchange="saveDailyNote()"></textarea>
+            </div>
+            <button class="nb-btn nb-btn-green" style="padding: 6px 10px; font-size: 0.75rem;" onclick="saveDailyNote(true)">💾 Lưu</button>
+        </div>
+
+        <!-- NAVIGATION TAB BAR -->
+        <nav>
+            <button class="nb-btn tab-btn active" onclick="switchTab('market')">🛒 Chợ Linh Kiện</button>
+            <button class="nb-btn tab-btn" onclick="switchTab('workbench')">🛠️ Lắp Ráp (Workbench)</button>
+            <button class="nb-btn tab-btn" onclick="switchTab('orders')">📋 Khách Đặt <span id="orders-badge" class="nb-badge">0</span></button>
+            <button class="nb-btn tab-btn" onclick="switchTab('reviews')">💬 Đánh Giá</button>
+            <button class="nb-btn tab-btn" onclick="switchTab('settings')">⚙️ Hệ Thống</button>
+        </nav>
+
+        <!-- TAB 1: MARKET -->
+        <div id="tab-market" class="tab-panel active">
+            <div class="market-layout">
+                <div class="category-menu nb-card">
+                    <h3 style="margin-bottom: 8px; font-size: 0.8rem; text-transform: uppercase; color:#555;">Danh Mục</h3>
+                    <button class="cat-btn active" onclick="filterMarket('CPU')">⚡ CPU (Vi Xử Lý)</button>
+                    <button class="cat-btn" onclick="filterMarket('GPU')">🎮 GPU (Card Đồ Họa)</button>
+                    <button class="cat-btn" onclick="filterMarket('Motherboard')">🔌 Mainboard</button>
+                    <button class="cat-btn" onclick="filterMarket('RAM')">🧠 RAM</button>
+                    <button class="cat-btn" onclick="filterMarket('Storage')">💾 SSD / Ổ Cứng</button>
+                    <button class="cat-btn" onclick="filterMarket('PSU')">🔋 Nguồn (PSU)</button>
+                    <button class="cat-btn" onclick="filterMarket('Cooler')">❄️ Tản Nhiệt</button>
+                    <button class="cat-btn" onclick="filterMarket('Case')">📦 Vỏ Case RGB</button>
+                </div>
+                <div class="nb-card" style="background: #f8fafc;">
+                    <div style="margin-bottom:10px; display:flex; justify-content:space-between; align-items:center;">
+                        <h2 id="market-title" style="font-size:1.1rem; color:var(--dark);">⚡ CPU (Vi Xử Lý)</h2>
+                        <span style="font-size:0.75rem; color:#666;">*Vượt Level để mở khóa đồ xịn hơn</span>
+                    </div>
+                    <div id="market-items-grid" class="items-grid"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: WORKBENCH -->
+        <div id="tab-workbench" class="tab-panel">
+            <div class="workbench-layout">
+                <div class="nb-card" style="display:flex; flex-direction:column; gap:12px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <h2 style="font-size:1.1rem;">🛠️ Khung Máy Đang Lắp</h2>
+                        <button class="nb-btn nb-btn-pink" onclick="clearWorkbench()">🧹 Dọn Dẹp Bàn</button>
+                    </div>
+                    <div id="workbench-slots" class="slots-grid"></div>
+                </div>
+
+                <div class="nb-card" style="display:flex; flex-direction:column; gap:12px;">
+                    <h3 style="font-size:0.95rem;">📊 Sức Mạnh Cỗ Máy</h3>
+                    <div style="background: white; border:2px solid var(--dark); padding:10px; border-radius:8px; display:flex; flex-direction:column; gap:6px;">
+                        <div>⚡ Điểm Benchmark: <strong id="wb-total-score" style="font-size: 1.1rem; color:var(--purple);">0</strong> pts</div>
+                        <div>💵 Tổng Giá Vốn: <strong id="wb-total-cost" style="font-size: 1rem; color:#059669;">$0</strong></div>
+                    </div>
+
+                    <h3 style="font-size:0.95rem;">🎒 Kho Linh Kiện Của Bạn (<span id="inv-count">0</span>)</h3>
+                    <div id="inventory-list" class="inventory-list"></div>
+
+                    <div style="margin-top:auto; padding-top:10px;">
+                        <button class="nb-btn nb-btn-green" style="width:100%; font-size:0.9rem; padding:10px;" onclick="deliverBuildModal()">🚀 Bàn Giao Cho Khách</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: ORDERS -->
+        <div id="tab-orders" class="tab-panel">
+            <div class="nb-card">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+                    <h2 style="font-size:1.1rem;">📋 Yêu Cầu Từ Khách Hàng</h2>
+                    <span class="nb-badge" style="background:var(--pink); color:white; font-size:0.8rem;">Chỉ tiêu hôm nay: <span id="orders-target-count">0 / 5</span> Khách</span>
+                </div>
+                <div id="orders-grid" class="orders-grid"></div>
+            </div>
+        </div>
+
+        <!-- TAB 4: REVIEWS -->
+        <div id="tab-reviews" class="tab-panel">
+            <div class="nb-card" style="margin-bottom:12px; text-align:center; background:var(--cyan); padding:12px;">
+                <h2 style="font-size:1.1rem;">🌟 Uy Tín Cửa Hàng</h2>
+                <div id="display-reputation" style="font-size:2.5rem; font-weight:900;">100%</div>
+                <p style="font-weight:700; font-size:0.8rem;">Danh tiếng cao thu hút khách VIP!</p>
+            </div>
+            <div class="nb-card">
+                <h3 style="margin-bottom:10px; font-size:0.95rem;">💬 Phản Hồi Gần Đây</h3>
+                <div id="reviews-list" class="reviews-container"></div>
+            </div>
+        </div>
+
+        <!-- TAB 5: SETTINGS & PWA -->
+        <div id="tab-settings" class="tab-panel">
+            <div class="nb-card" style="max-width: 550px; margin:0 auto; display:flex; flex-direction:column; gap:12px;">
+                <h2 style="font-size:1.1rem;">📲 Cài Đặt Lên Màn Hình Chính</h2>
+                <button class="nb-btn nb-btn-purple" onclick="openModal('modal-pwa-guide')" style="padding:10px;">📱 Hướng Dẫn Thêm Vào Màn Hình (iPhone/Android)</button>
+
+                <hr style="border:1px solid var(--dark); margin:5px 0;">
+
+                <h2 style="font-size:1.1rem;">⚙️ Quản Lý Lưu Game (Save System)</h2>
+                <p style="font-size:0.8rem; color:#555;">Game TỰ ĐỘNG LƯU khi bạn mua hàng, giao máy hoặc hết giờ làm (17:00).</p>
+                
+                <button class="nb-btn nb-btn-yellow" onclick="manualSave()">💾 Lưu Game Ngay (Manual Save)</button>
+
+                <hr style="border:1px solid var(--dark); margin:5px 0;">
+
+                <div style="display:flex; flex-direction:column; gap:6px;">
+                    <label style="font-weight:800; font-size:0.8rem;">Mã Export Save (Base64) - Dùng để chuyển máy:</label>
+                    <textarea id="save-code-export" class="nb-input" rows="3" readonly style="resize:none; font-family:monospace; font-size:0.75rem;"></textarea>
+                    <button class="nb-btn" onclick="copySaveCode()">📋 Copy Mã Save</button>
+                </div>
+
+                <hr style="border:1px solid var(--dark); margin:5px 0;">
+
+                <div style="display:flex; flex-direction:column; gap:6px;">
+                    <label style="font-weight:800; font-size:0.8rem;">Import Save Code:</label>
+                    <textarea id="save-code-import" class="nb-input" rows="3" placeholder="Dán mã Base64 vào đây..." style="resize:none; font-family:monospace; font-size:0.75rem;"></textarea>
+                    <button class="nb-btn nb-btn-green" onclick="importSaveCode()">📥 Tải Dữ Liệu (Import)</button>
+                </div>
+
+                <hr style="border:1px solid var(--dark); margin:5px 0;">
+
+                <button class="nb-btn nb-btn-pink" onclick="resetGameConfirm()">💥 Xóa Dữ Liệu & Chơi Lại Từ Đầu</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ONBOARDING MODAL -->
+    <div id="modal-onboarding" class="modal-overlay">
+        <div class="modal-body" style="text-align: center;">
+            <div style="font-size: 3rem;">💻✨</div>
+            <h2 style="color:var(--purple); font-size:1.5rem;">Chào Mừng Boss GenZ!</h2>
+            <p style="font-size:0.85rem; color:#444;">Bạn được cấp số vốn <strong style="color:var(--green)">$5,000</strong>. Hãy đặt tên Shop và bắt đầu khởi nghiệp nào!</p>
+            
+            <div style="display:flex; flex-direction:column; gap:10px; text-align:left; margin:10px 0;">
+                <div>
+                    <label style="font-weight:800; font-size:0.8rem;">🏪 Tên Cửa Hàng:</label>
+                    <input type="text" id="onboard-shop-name" class="nb-input" value="Cyber Rig Store" maxlength="25">
+                </div>
+                <div>
+                    <label style="font-weight:800; font-size:0.8rem;">😎 Tên Của Boss:</label>
+                    <input type="text" id="onboard-manager-name" class="nb-input" value="Bro GenZ" maxlength="20">
+                </div>
+            </div>
+
+            <button class="nb-btn nb-btn-green" style="width:100%; padding:10px; font-size:1rem;" onclick="submitOnboarding()">🔥 MỞ CỬA KINH DOANH!</button>
+        </div>
+    </div>
+
+    <!-- END OF DAY SUMMARY MODAL -->
+    <div id="modal-end-day" class="modal-overlay">
+        <div class="modal-body">
+            <h2 style="color:var(--purple); text-align:center; font-size:1.4rem;" id="eod-title">🌆 HẾT CA LÀM VIỆC!</h2>
+            <p style="text-align:center; font-weight:700; font-size:0.85rem;" id="eod-subtitle">Tổng kết doanh thu hôm nay!</p>
+            
+            <div style="background:white; border:2px solid var(--dark); padding:12px; border-radius:8px; display:flex; flex-direction:column; gap:6px; font-size:0.9rem;">
+                <div style="display:flex; justify-content:space-between;"><span>💵 Tiền Kiếm Được:</span><strong id="eod-revenue" style="color:#059669;">+$0</strong></div>
+                <div style="display:flex; justify-content:space-between;"><span>🛒 Chi Mua Đồ:</span><strong id="eod-expenses" style="color:#dc2626;">-$0</strong></div>
+                <hr style="border:1px solid #ccc;">
+                <div style="display:flex; justify-content:space-between; font-size:1.05rem;"><span>📈 Lợi Nhuận:</span><strong id="eod-net">$0</strong></div>
+                <div style="display:flex; justify-content:space-between;"><span>💻 Khách Đã Phục Vụ:</span><strong id="eod-builds">0 / 0</strong></div>
+            </div>
+
+            <p style="font-size:0.8rem; text-align:center; color:#059669; font-weight:bold;">✅ Hệ thống đã tự động lưu tiến trình!</p>
+
+            <button class="nb-btn nb-btn-green" style="width:100%; padding:10px; font-size:0.95rem;" onclick="startNextDay()">☀️ Bắt Đầu Ngày Mới (06:00 AM)</button>
+        </div>
+    </div>
+
+    <!-- DELIVER PC MODAL -->
+    <div id="modal-deliver" class="modal-overlay">
+        <div class="modal-body">
+            <h2 style="font-size:1.2rem;">🚀 Giao Hàng Cho Khách</h2>
+            <p style="font-size:0.85rem;">Chọn khách hàng để bàn giao bộ PC này:</p>
+            <div id="deliver-orders-list" style="display:flex; flex-direction:column; gap:8px; max-height:250px; overflow-y:auto;"></div>
+            <button class="nb-btn nb-btn-pink" style="margin-top:10px;" onclick="closeModal('modal-deliver')">Hủy / Đóng</button>
+        </div>
+    </div>
+
+    <!-- PWA GUIDE MODAL -->
+    <div id="modal-pwa-guide" class="modal-overlay">
+        <div class="modal-body">
+            <h2 style="font-size:1.2rem; text-align:center;">📱 Chơi Game Như Ứng Dụng (App)</h2>
+            <p style="font-size:0.85rem; color:#444; text-align:center;">Thêm game vào Màn Hình Chính điện thoại để chơi mượt mà toàn màn hình, không cần tải từ Store!</p>
+            
+            <div style="background:white; border:2px solid var(--dark); padding:12px; border-radius:8px; font-size:0.85rem; display:flex; flex-direction:column; gap:10px;">
+                <strong style="color:var(--purple); font-size:0.95rem;">🍎 Dành cho iPhone / iPad (Safari):</strong>
+                <ol style="padding-left:22px; line-height:1.4;">
+                    <li>Mở link game bằng trình duyệt <strong>Safari</strong>.</li>
+                    <li>Bấm vào biểu tượng <strong>Chia Sẻ (Share)</strong> 📤 ở dưới cùng.</li>
+                    <li>Vuốt xuống chọn <strong>"Thêm vào MH chính" (Add to Home Screen)</strong> ➕.</li>
+                </ol>
+
+                <strong style="color:#0284c7; font-size:0.95rem; margin-top:5px;">🤖 Dành cho Android (Chrome/Edge):</strong>
+                <ol style="padding-left:22px; line-height:1.4;">
+                    <li>Bấm vào biểu tượng <strong>3 chấm (⋮)</strong> ở góc trên bên phải.</li>
+                    <li>Chọn <strong>"Thêm vào màn hình chính"</strong> hoặc <strong>"Cài đặt ứng dụng"</strong>.</li>
+                </ol>
+            </div>
+
+            <button class="nb-btn nb-btn-green" style="width:100%; padding:10px;" onclick="closeModal('modal-pwa-guide')">Đã Rõ / Đóng</button>
+        </div>
+    </div>
+
+    <div id="toast-container"></div>
+
+    <script>
+        const SAVE_KEY = 'pc_tycoon_genz_v2';
+
+        // MASSIVE EXPANDED CATALOG WITH LEVELS
+        const CATALOG = [
+            // CPU
+            { id: 'cpu_1', category: 'CPU', name: 'Intel Core i3-10100F', brand: 'Intel', price: 70, score: 900, level: 1 },
+            { id: 'cpu_2', category: 'CPU', name: 'AMD Ryzen 3 3200G', brand: 'AMD', price: 85, score: 1000, level: 1 },
+            { id: 'cpu_3', category: 'CPU', name: 'Intel Core i5-12400F', brand: 'Intel', price: 150, score: 2000, level: 2 },
+            { id: 'cpu_4', category: 'CPU', name: 'AMD Ryzen 5 5600X', brand: 'AMD', price: 160, score: 2200, level: 2 },
+            { id: 'cpu_5', category: 'CPU', name: 'Intel Core i7-13700K', brand: 'Intel', price: 380, score: 4500, level: 3 },
+            { id: 'cpu_6', category: 'CPU', name: 'AMD Ryzen 7 7800X3D', brand: 'AMD', price: 420, score: 5000, level: 3 },
+            { id: 'cpu_7', category: 'CPU', name: 'Intel Core i9-14900KS', brand: 'Intel', price: 650, score: 7500, level: 4 },
+            { id: 'cpu_8', category: 'CPU', name: 'AMD Threadripper 7980X', brand: 'AMD', price: 1500, score: 12000, level: 5 },
+
+            // GPU
+            { id: 'gpu_1', category: 'GPU', name: 'GT 1030 2GB', brand: 'NVIDIA', price: 80, score: 500, level: 1 },
+            { id: 'gpu_2', category: 'GPU', name: 'RX 580 8GB (Trâu Cày)', brand: 'AMD', price: 100, score: 1200, level: 1 },
+            { id: 'gpu_3', category: 'GPU', name: 'RTX 3060 12GB', brand: 'NVIDIA', price: 280, score: 3200, level: 2 },
+            { id: 'gpu_4', category: 'GPU', name: 'RX 6700 XT 12GB', brand: 'AMD', price: 320, score: 3800, level: 2 },
+            { id: 'gpu_5', category: 'GPU', name: 'RTX 4070 Ti Super', brand: 'NVIDIA', price: 800, score: 8500, level: 3 },
+            { id: 'gpu_6', category: 'GPU', name: 'RX 7900 XTX 24GB', brand: 'AMD', price: 950, score: 9800, level: 3 },
+            { id: 'gpu_7', category: 'GPU', name: 'RTX 4090 24GB CyberRGB', brand: 'NVIDIA', price: 1800, score: 16000, level: 4 },
+            { id: 'gpu_8', category: 'GPU', name: 'RTX 5090 32GB Titan (Leak)', brand: 'NVIDIA', price: 2800, score: 25000, level: 5 },
+
+            // Motherboard
+            { id: 'mb_1', category: 'Motherboard', name: 'H410M Basic', brand: 'ASRock', price: 60, score: 300, level: 1 },
+            { id: 'mb_2', category: 'Motherboard', name: 'B450M Pro4', brand: 'ASRock', price: 75, score: 450, level: 1 },
+            { id: 'mb_3', category: 'Motherboard', name: 'B660M Mortar Wifi', brand: 'MSI', price: 150, score: 1100, level: 2 },
+            { id: 'mb_4', category: 'Motherboard', name: 'B650E Aorus Elite', brand: 'Gigabyte', price: 220, score: 1600, level: 3 },
+            { id: 'mb_5', category: 'Motherboard', name: 'Z790 ROG Maximus Hero', brand: 'ASUS', price: 600, score: 3500, level: 4 },
+            { id: 'mb_6', category: 'Motherboard', name: 'TRX50 Creator Extreme', brand: 'ASUS', price: 900, score: 5500, level: 5 },
+
+            // RAM
+            { id: 'ram_1', category: 'RAM', name: '8GB DDR4 2666MHz', brand: 'Kingston', price: 20, score: 250, level: 1 },
+            { id: 'ram_2', category: 'RAM', name: '16GB (2x8) DDR4 3200', brand: 'Corsair', price: 45, score: 600, level: 1 },
+            { id: 'ram_3', category: 'RAM', name: '32GB (2x16) DDR5 5600', brand: 'G.Skill', price: 110, score: 1500, level: 2 },
+            { id: 'ram_4', category: 'RAM', name: '64GB (2x32) DDR5 6400 RGB', brand: 'TeamGroup', price: 250, score: 3200, level: 3 },
+            { id: 'ram_5', category: 'RAM', name: '128GB (4x32) DDR5 7200 Titanium', brand: 'Corsair', price: 600, score: 7000, level: 4 },
+            { id: 'ram_6', category: 'RAM', name: '256GB ECC DDR5 Workstation', brand: 'Samsung', price: 1200, score: 12000, level: 5 },
+
+            // Storage
+            { id: 'ssd_1', category: 'Storage', name: '256GB SATA III SSD', brand: 'Apacer', price: 25, score: 200, level: 1 },
+            { id: 'ssd_2', category: 'Storage', name: '500GB NVMe Gen3', brand: 'WD Blue', price: 45, score: 500, level: 1 },
+            { id: 'ssd_3', category: 'Storage', name: '1TB NVMe Gen4 7300MB/s', brand: 'Samsung', price: 100, score: 1400, level: 2 },
+            { id: 'ssd_4', category: 'Storage', name: '2TB NVMe Gen4 RGB', brand: 'Kingston', price: 160, score: 2200, level: 3 },
+            { id: 'ssd_5', category: 'Storage', name: '4TB NVMe Gen5 12000MB/s', brand: 'Crucial', price: 400, score: 4800, level: 4 },
+            { id: 'ssd_6', category: 'Storage', name: '8TB U.2 Enterprise SSD', brand: 'Micron', price: 950, score: 9000, level: 5 },
+
+            // PSU
+            { id: 'psu_1', category: 'PSU', name: '450W No-Name (Bom Nổ Chậm)', brand: 'Noname', price: 15, score: 100, level: 1 },
+            { id: 'psu_2', category: 'PSU', name: '550W 80+ Bronze', brand: 'Corsair', price: 55, score: 450, level: 1 },
+            { id: 'psu_3', category: 'PSU', name: '750W 80+ Gold Modular', brand: 'CoolerMaster', price: 100, score: 1000, level: 2 },
+            { id: 'psu_4', category: 'PSU', name: '1000W 80+ Platinum', brand: 'Seasonic', price: 220, score: 2500, level: 3 },
+            { id: 'psu_5', category: 'PSU', name: '1600W 80+ Titanium ATX 3.0', brand: 'ASUS Thor', price: 450, score: 4500, level: 4 },
+            { id: 'psu_6', category: 'PSU', name: '2000W SuperNova', brand: 'EVGA', price: 700, score: 7500, level: 5 },
+
+            // Cooler
+            { id: 'clr_1', category: 'Cooler', name: 'Tản nhiệt Zin (Stock)', brand: 'Generic', price: 10, score: 100, level: 1 },
+            { id: 'clr_2', category: 'Cooler', name: 'Tản Tháp Khí 4 Ống Đồng', brand: 'DeepCool', price: 25, score: 400, level: 1 },
+            { id: 'clr_3', category: 'Cooler', name: 'Tản Tháp Khí Kép ARGB', brand: 'Thermalright', price: 50, score: 900, level: 2 },
+            { id: 'clr_4', category: 'Cooler', name: 'Tản Nước AIO 240mm RGB', brand: 'NZXT', price: 120, score: 1800, level: 3 },
+            { id: 'clr_5', category: 'Cooler', name: 'Tản Nước AIO 360mm LCD', brand: 'Corsair', price: 250, score: 3500, level: 4 },
+            { id: 'clr_6', category: 'Cooler', name: 'Tản Nước Custom Ống Cứng Dát Vàng', brand: 'EKWB', price: 800, score: 8500, level: 5 },
+
+            // Case
+            { id: 'case_1', category: 'Case', name: 'Vỏ Case Văn Phòng Đen', brand: 'Generic', price: 20, score: 100, level: 1 },
+            { id: 'case_2', category: 'Case', name: 'Vỏ Case Lưới 3 Fan Mầu', brand: 'Xigmatek', price: 40, score: 350, level: 1 },
+            { id: 'case_3', category: 'Case', name: 'Case Bể Cá Panorama RGB', brand: 'Lian Li', price: 120, score: 1100, level: 2 },
+            { id: 'case_4', category: 'Case', name: 'Full-Tower Nhôm Khối Kính Cường Lực', brand: 'Phanteks', price: 250, score: 2500, level: 3 },
+            { id: 'case_5', category: 'Case', name: 'Case Phi Thuyền Dị Dạng', brand: 'Cougar', price: 500, score: 4500, level: 4 },
+            { id: 'case_6', category: 'Case', name: 'Case Bàn Kính Có Motor Nâng Hạ', brand: 'Lian Li DK', price: 1500, score: 10000, level: 5 }
+        ];
+
+        // CLIENT TYPES MAPPED TO PLAYER LEVEL
+        const CLIENT_TYPES = [
+            { role: 'Phụ Huynh Mua Cho Con', avatar: '👨‍👦', reqLevel: 1, baseScore: 3000, baseBudget: 350, desc: "Bác cần máy rẻ rẻ cho cháu học Word, Excel với lướt Web thôi cháu ạ." },
+            { role: 'Học Sinh Cấp 2', avatar: '🎒', reqLevel: 1, baseScore: 4500, baseBudget: 500, desc: "Em muốn máy chơi mượt Roblox với Minecraft, tiền tiết kiệm có nhiu đó thôi ạ." },
+            { role: 'Sinh Viên Ngèo', avatar: '🍜', reqLevel: 2, baseScore: 9000, baseBudget: 1100, desc: "Cần máy code với thỉnh thoảng leo rank LoL mượt tí ạ." },
+            { role: 'Editor Cắt Ghép Lỏ', avatar: '🎬', reqLevel: 2, baseScore: 12000, baseBudget: 1400, desc: "Anh cần render Premiere ổn định tí, dạo này nhận nhiều kèo." },
+            { role: 'Streamer GenZ Flexer', avatar: '🎧', reqLevel: 3, baseScore: 28000, baseBudget: 3200, desc: "Build anh dàn máy full led RGB xập xình để stream CS2 400FPS nào!" },
+            { role: 'Thiết Kế Đồ Họa 3D', avatar: '🎨', reqLevel: 3, baseScore: 35000, baseBudget: 3800, desc: "Mình làm Blender và Maya, cần Card trâu và RAM bự nhé shop." },
+            { role: 'Phú Nhị Đại Lên Phố', avatar: '🏎️', reqLevel: 4, baseScore: 60000, baseBudget: 7500, desc: "Tiền không thiếu, gắn cho anh combo i9 + RTX 4090 to nhất cửa hàng!" },
+            { role: 'Chủ Tịch Công Nghệ', avatar: '👔', reqLevel: 5, baseScore: 100000, baseBudget: 15000, desc: "Tôi cần một cỗ máy workstation mạnh nhất thế giới để tính toán AI và mô phỏng." }
+        ];
+
+        const GENZ_PRAISES = [
+            "10/10 no notes! Máy chạy mượt vãi chưởng, flexing cực gắt!",
+            "W Build! Chơi game combat mượt xé gió, uy tín chuẩn 5 sao!",
+            "Đúng là Shop đỉnh chóp! Main character energy tràn màn hình!",
+            "Nhận máy xịn xò sLAY cả xóm, cho shop 100 điểm thanh lịch!",
+            "Quá êm! Carry cả team cân mọi thể loại game!"
+        ];
+        const GENZ_COMPLAINTS = [
+            "Cooked thật sự... Chơi game giật lag tung chảo :(",
+            "L Build! Máy yếu như sên, chạy tí là đứng hình!",
+            "Thất vọng dã man, đắt mà phế, chê mạnh!",
+            "Cấu hình thế này thì chôn đi shop ơi..."
+        ];
+
+        const CATEGORIES = ['Motherboard', 'CPU', 'RAM', 'GPU', 'Storage', 'PSU', 'Cooler', 'Case'];
+        
+        const LEVEL_THRESHOLDS = {
+            1: 0,
+            2: 800,
+            3: 2500,
+            4: 6000,
+            5: 15000
+        };
+
+        const DEFAULT_STATE = {
+            shopName: "Cyber Rig Store",
+            managerName: "Bro GenZ",
+            isFirstTime: true,
+            cash: 5000, // START WITH $5000 AS REQUESTED
+            level: 1,
+            xp: 0,
+            day: 1,
+            timeSeconds: 21600, // 06:00 AM
+            dailyQuota: 6,
+            inventory: [],
+            workbench: { Motherboard: null, CPU: null, RAM: null, GPU: null, Storage: null, PSU: null, Cooler: null, Case: null },
+            orders: [],
+            reviews: [],
+            reputation: 100,
+            todayServedClients: 0,
+            todaySpawnedClients: 0,
+            dailyNote: "",
+            dailyStats: { revenue: 0, expenses: 0, builds: 0 }
+        };
+
+        let gameState = {};
+        let currentMarketCat = 'CPU';
+        let timerInterval = null;
+
+        function getRandomDailyQuota() {
+            return Math.floor(Math.random() * 6) + 5; // 5 to 10
+        }
+
+        function initGame() {
+            loadGame();
+
+            if (gameState.isFirstTime) {
+                openModal('modal-onboarding');
+            }
+
+            checkLevelUp(); // Ensure level is correct on load
+            checkAndMaintainOrders();
+            startClock();
+            renderHeader();
+            renderMarket();
+            renderWorkbench();
+            renderOrders();
+            renderReviews();
+            renderDailyNote();
+        }
+
+        function saveGame(silent = true) {
+            try {
+                const serialized = JSON.stringify(gameState);
+                localStorage.setItem(SAVE_KEY, serialized);
+                const exp = document.getElementById('save-code-export');
+                if (exp) exp.value = btoa(serialized);
+                if (!silent) showToast("✅ Đã lưu game thành công!");
+            } catch (e) {
+                console.error("Lỗi save:", e);
+            }
+        }
+
+        function loadGame() {
+            try {
+                const saved = localStorage.getItem(SAVE_KEY);
+                if (saved) {
+                    const parsed = JSON.parse(saved);
+                    gameState = { ...DEFAULT_STATE, ...parsed };
+                    
+                    // Fallbacks for older saves
+                    if (!gameState.level) gameState.level = 1;
+                    if (!gameState.xp) gameState.xp = 0;
+                    if (!gameState.dailyQuota) gameState.dailyQuota = getRandomDailyQuota();
+                    CATEGORIES.forEach(c => { if (!gameState.workbench[c]) gameState.workbench[c] = null; });
+                } else {
+                    gameState = JSON.parse(JSON.stringify(DEFAULT_STATE));
+                    gameState.dailyQuota = getRandomDailyQuota();
+                }
+            } catch (e) {
+                gameState = JSON.parse(JSON.stringify(DEFAULT_STATE));
+                gameState.dailyQuota = getRandomDailyQuota();
+            }
+        }
+
+        function addXP(amount) {
+            gameState.xp += amount;
+            checkLevelUp();
+            renderHeader();
+        }
+
+        function checkLevelUp() {
+            let newLevel = 1;
+            for (let lvl = 5; lvl >= 1; lvl--) {
+                if (gameState.xp >= LEVEL_THRESHOLDS[lvl]) {
+                    newLevel = lvl;
+                    break;
+                }
+            }
+            if (newLevel > gameState.level) {
+                gameState.level = newLevel;
+                showToast(`🎉 CHÚC MỪNG! BẠN ĐÃ LÊN CẤP ${gameState.level}! Đã mở khóa linh kiện mới ở chợ!`);
+                renderMarket(); // Refresh UI to remove locks
+            }
+        }
+
+        function saveDailyNote(notify = false) {
+            const input = document.getElementById('daily-note-input');
+            if (input) {
+                gameState.dailyNote = input.value;
+                saveGame(true);
+                if (notify) showToast("📌 Đã lưu ghi chú trong ngày!");
+            }
+        }
+
+        function renderDailyNote() {
+            const input = document.getElementById('daily-note-input');
+            if (input && gameState.dailyNote !== undefined) {
+                input.value = gameState.dailyNote;
+            }
+        }
+
+        function submitOnboarding() {
+            const shop = document.getElementById('onboard-shop-name').value.trim();
+            const manager = document.getElementById('onboard-manager-name').value.trim();
+            if (shop) gameState.shopName = shop;
+            if (manager) gameState.managerName = manager;
+
+            gameState.isFirstTime = false;
+            closeModal('modal-onboarding');
+            saveGame();
+            renderHeader();
+            showToast("🚀 Khởi nghiệp thành công với $5000! Chúc sếp mua may bán đắt!");
+        }
+
+        function startClock() {
+            if (timerInterval) clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                gameState.timeSeconds += 66; // Clock speed (10 real mins = 11 in-game hours)
+                if (gameState.timeSeconds >= 61200) { // 17:00 PM
+                    gameState.timeSeconds = 61200;
+                    updateClockDisplay();
+                    triggerEndOfDay(false);
+                } else {
+                    updateClockDisplay();
+                    checkAndMaintainOrders();
+                }
+            }, 1000);
+        }
+
+        function updateClockDisplay() {
+            const hrs = Math.floor(gameState.timeSeconds / 3600);
+            const mins = Math.floor((gameState.timeSeconds % 3600) / 60);
+            const ampm = hrs >= 12 ? 'PM' : 'AM';
+            const formattedHrs = (hrs % 12 || 12).toString().padStart(2, '0');
+            const formattedMins = mins.toString().padStart(2, '0');
+            document.getElementById('display-clock').innerText = `${formattedHrs}:${formattedMins} ${ampm}`;
+        }
+
+        function checkAndMaintainOrders() {
+            while (gameState.orders.length < 3 && gameState.todaySpawnedClients < gameState.dailyQuota) {
+                spawnOrder();
+            }
+        }
+
+        function spawnOrder() {
+            if (gameState.todaySpawnedClients >= gameState.dailyQuota) return;
+            gameState.todaySpawnedClients += 1;
+
+            // SMART TIERING: Only spawn clients that the player's level can handle
+            const availableRoles = CLIENT_TYPES.filter(c => c.reqLevel <= gameState.level);
+            const type = availableRoles[Math.floor(Math.random() * availableRoles.length)];
+
+            // Randomize target based on role base stats
+            const targetScore = Math.floor(type.baseScore * (0.8 + Math.random() * 0.4));
+            const budget = Math.floor(type.baseBudget * (0.9 + Math.random() * 0.35));
+
+            const order = {
+                id: Date.now() + Math.random(),
+                clientName: `${type.role} #${gameState.todaySpawnedClients}`,
+                avatar: type.avatar,
+                desc: type.desc,
+                targetScore: targetScore,
+                budget: budget
+            };
+            gameState.orders.push(order);
+            renderOrders();
+            renderHeader();
+        }
+
+        function triggerEndOfDay(isEarlyFinish = false) {
+            clearInterval(timerInterval);
+            saveGame(); // Auto Save
+
+            const titleEl = document.getElementById('eod-title');
+            const subtitleEl = document.getElementById('eod-subtitle');
+
+            if (isEarlyFinish) {
+                titleEl.innerText = "🎉 HOÀN THÀNH XUẤT SẮC!";
+                subtitleEl.innerText = `Đã phục vụ đủ ${gameState.todayServedClients}/${gameState.dailyQuota} khách! Nghỉ sớm thôi boss!`;
+            } else {
+                titleEl.innerText = "🌆 HẾT CA LÀM VIỆC!";
+                subtitleEl.innerText = "Đã 05:00 PM. Tổng kết tiền cuối ngày!";
+            }
+
+            document.getElementById('eod-revenue').innerText = `+$${gameState.dailyStats.revenue.toLocaleString()}`;
+            document.getElementById('eod-expenses').innerText = `-$${gameState.dailyStats.expenses.toLocaleString()}`;
+            
+            const net = gameState.dailyStats.revenue - gameState.dailyStats.expenses;
+            const netEl = document.getElementById('eod-net');
+            netEl.innerText = `${net >= 0 ? '+' : ''}$${net.toLocaleString()}`;
+            netEl.style.color = net >= 0 ? '#059669' : '#dc2626';
+            document.getElementById('eod-builds').innerText = `${gameState.todayServedClients} / ${gameState.dailyQuota} khách`;
+
+            openModal('modal-end-day');
+        }
+
+        function startNextDay() {
+            closeModal('modal-end-day');
+            gameState.day += 1;
+            gameState.timeSeconds = 21600; 
+            gameState.dailyQuota = getRandomDailyQuota();
+            gameState.todayServedClients = 0;
+            gameState.todaySpawnedClients = 0;
+            gameState.orders = [];
+            gameState.dailyStats = { revenue: 0, expenses: 0, builds: 0 };
+
+            checkAndMaintainOrders();
+            renderHeader();
+            renderOrders();
+            renderDailyNote();
+            saveGame();
+            startClock();
+            showToast(`☀️ Ngày ${gameState.day}! Chỉ tiêu: ${gameState.dailyQuota} khách!`);
+        }
+
+        function renderHeader() {
+            document.getElementById('display-shop-name').innerText = gameState.shopName;
+            document.getElementById('display-manager-name').innerText = gameState.managerName;
+            document.getElementById('display-cash').innerText = `$${gameState.cash.toLocaleString()}`;
+            document.getElementById('display-day').innerText = `Ngày ${gameState.day}`;
+            document.getElementById('display-reputation').innerText = `${gameState.reputation}%`;
+            document.getElementById('display-today-clients').innerText = `${gameState.todayServedClients} / ${gameState.dailyQuota}`;
+            document.getElementById('orders-target-count').innerText = `${gameState.todayServedClients} / ${gameState.dailyQuota}`;
+            document.getElementById('orders-badge').innerText = gameState.orders.length;
+            
+            document.getElementById('display-level').innerText = `Lv.${gameState.level}`;
+            
+            // Calculate XP Bar percentage
+            let currentLvlXp = LEVEL_THRESHOLDS[gameState.level];
+            let nextLvlXp = gameState.level < 5 ? LEVEL_THRESHOLDS[gameState.level + 1] : LEVEL_THRESHOLDS[5];
+            let percent = 100;
+            if (gameState.level < 5) {
+                percent = ((gameState.xp - currentLvlXp) / (nextLvlXp - currentLvlXp)) * 100;
+            }
+            document.getElementById('xp-bar').style.width = `${Math.min(100, Math.max(0, percent))}%`;
+
+            updateClockDisplay();
+        }
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-panel').forEach(panel => panel.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById(`tab-${tabId}`).classList.add('active');
+            if (tabId === 'settings') {
+                document.getElementById('save-code-export').value = btoa(JSON.stringify(gameState));
+            }
+        }
+
+        function filterMarket(cat) {
+            currentMarketCat = cat;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.innerText.includes(cat));
+            });
+            const textMap = {
+                'CPU': '⚡ CPU (Vi Xử Lý)', 'GPU': '🎮 GPU (Card Đồ Họa)', 'Motherboard': '🔌 Mainboard',
+                'RAM': '🧠 RAM', 'Storage': '💾 SSD / Ổ Cứng', 'PSU': '🔋 Nguồn (PSU)',
+                'Cooler': '❄️ Tản Nhiệt', 'Case': '📦 Vỏ Case RGB'
+            };
+            document.getElementById('market-title').innerText = textMap[cat];
+            renderMarket();
+        }
+
+        function renderMarket() {
+            const grid = document.getElementById('market-items-grid');
+            grid.innerHTML = '';
+
+            const items = CATALOG.filter(item => item.category === currentMarketCat);
+            items.forEach(item => {
+                const isLocked = item.level > gameState.level;
+                
+                const card = document.createElement('div');
+                card.className = `item-card ${isLocked ? 'locked' : ''}`;
+                card.innerHTML = `
+                    <div>
+                        <div class="item-header">
+                            <span class="item-title">${item.name}</span>
+                            <span class="item-score">⚡ ${item.score}</span>
+                        </div>
+                        <div class="item-brand">Hãng: ${item.brand}</div>
+                    </div>
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:6px;">
+                        <span style="font-weight:900; color:${isLocked ? '#9ca3af' : '#059669'}; font-size:0.95rem;">$${item.price}</span>
+                        <button class="nb-btn nb-btn-green" style="padding:4px 8px; font-size:0.75rem;" 
+                            ${isLocked ? 'disabled' : `onclick="buyItem('${item.id}')"`}>
+                            ${isLocked ? 'Khóa' : 'Mua'}
+                        </button>
+                    </div>
+                    ${isLocked ? `<div class="lock-overlay">🔒 Yêu Cầu Lv.${item.level}</div>` : ''}
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function buyItem(itemId) {
+            const item = CATALOG.find(i => i.id === itemId);
+            if (!item) return;
+
+            if (item.level > gameState.level) {
+                showToast("❌ Level chưa đủ để mua món này!");
+                return;
+            }
+
+            if (gameState.cash < item.price) {
+                showToast("❌ Không đủ tiền trong tài khoản!");
+                return;
+            }
+
+            gameState.cash -= item.price;
+            gameState.dailyStats.expenses += item.price;
+            gameState.inventory.push({ ...item, instanceId: Date.now() + Math.random() });
+
+            renderHeader();
+            renderWorkbench();
+            saveGame();
+            showToast(`🛒 Đã mua ${item.name} (-$${item.price})`);
+        }
+
+        function renderWorkbench() {
+            const slotsContainer = document.getElementById('workbench-slots');
+            slotsContainer.innerHTML = '';
+            let totalScore = 0, totalCost = 0;
+
+            CATEGORIES.forEach(cat => {
+                const item = gameState.workbench[cat];
+                if (item) { totalScore += item.score; totalCost += item.price; }
+                const slot = document.createElement('div');
+                slot.className = `slot-card ${item ? 'filled' : ''}`;
+                slot.innerHTML = `
+                    <div>
+                        <div class="slot-title">${cat}</div>
+                        ${item ? `<div class="slot-item-name">${item.name}</div>` : `<div style="font-size:0.75rem; color:#999; margin-top:5px;">(Trống)</div>`}
+                    </div>
+                    ${item ? `
+                        <div style="display:flex; justify-content:space-between; align-items:center; margin-top:5px;">
+                            <span class="nb-badge">⚡ ${item.score}</span>
+                            <button class="nb-btn nb-btn-pink" style="padding:2px 6px; font-size:0.7rem;" onclick="unmountComponent('${cat}')">Gỡ</button>
+                        </div>
+                    ` : ''}
+                `;
+                slotsContainer.appendChild(slot);
+            });
+
+            document.getElementById('wb-total-score').innerText = totalScore.toLocaleString();
+            document.getElementById('wb-total-cost').innerText = `$${totalCost.toLocaleString()}`;
+
+            const invContainer = document.getElementById('inventory-list');
+            invContainer.innerHTML = '';
+            document.getElementById('inv-count').innerText = gameState.inventory.length;
+
+            if (gameState.inventory.length === 0) {
+                invContainer.innerHTML = `<div style="text-align:center; color:#777; font-size:0.8rem; padding:15px;">Kho trống trơn. Hãy mua đồ ở chợ!</div>`;
+            } else {
+                gameState.inventory.forEach(item => {
+                    const el = document.createElement('div');
+                    el.className = 'inventory-item';
+                    el.innerHTML = `
+                        <div>
+                            <div style="font-weight:800; font-size:0.8rem;">${item.name}</div>
+                            <div style="font-size:0.7rem; color:#666;">${item.category} | ⚡ ${item.score}</div>
+                        </div>
+                        <button class="nb-btn nb-btn-yellow" style="padding:4px 8px; font-size:0.75rem;" onclick="mountComponent('${item.instanceId}')">Ráp</button>
+                    `;
+                    invContainer.appendChild(el);
+                });
+            }
+        }
+
+        function mountComponent(instanceId) {
+            const idx = gameState.inventory.findIndex(i => i.instanceId == instanceId);
+            if (idx === -1) return;
+            const item = gameState.inventory[idx];
+            const cat = item.category;
+            if (gameState.workbench[cat]) unmountComponent(cat);
+            gameState.workbench[cat] = item;
+            gameState.inventory.splice(idx, 1);
+            renderWorkbench();
+        }
+
+        function unmountComponent(cat) {
+            const item = gameState.workbench[cat];
+            if (!item) return;
+            gameState.inventory.push(item);
+            gameState.workbench[cat] = null;
+            renderWorkbench();
+        }
+
+        function clearWorkbench() {
+            CATEGORIES.forEach(cat => {
+                if (gameState.workbench[cat]) {
+                    gameState.inventory.push(gameState.workbench[cat]);
+                    gameState.workbench[cat] = null;
+                }
+            });
+            renderWorkbench();
+            showToast("🧹 Đã cất tất cả đồ trên bàn về kho!");
+        }
+
+        function renderOrders() {
+            const grid = document.getElementById('orders-grid');
+            grid.innerHTML = '';
+
+            if (gameState.orders.length === 0) {
+                if (gameState.todayServedClients >= gameState.dailyQuota) {
+                    grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:20px; font-weight:700; color:#059669; font-size:1.1rem;">🎉 Đã phục vụ đủ chỉ tiêu hôm nay! Shop chuẩn bị nghỉ.</div>`;
+                } else {
+                    grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:20px; font-weight:700; color:#777;">Đang đợi khách hàng rẽ qua shop...</div>`;
+                }
+                return;
+            }
+
+            gameState.orders.forEach(order => {
+                const card = document.createElement('div');
+                card.className = 'order-card';
+                card.innerHTML = `
+                    <div style="display:flex; gap:10px; align-items:center;">
+                        <div class="client-avatar">${order.avatar}</div>
+                        <div>
+                            <div style="font-weight:900; font-size:0.9rem;">${order.clientName}</div>
+                            <div style="font-size:0.75rem; color:#666;">Đang đợi máy...</div>
+                        </div>
+                    </div>
+                    <p style="font-size:0.8rem; font-style:italic; background:#f8fafc; padding:8px; border-radius:6px; border:1px solid #e2e8f0; line-height:1.4;">"${order.desc}"</p>
+                    <div class="specs-req">
+                        <div>🎯 Cần Sức Mạnh: <strong style="color:var(--purple);">≥ ${order.targetScore.toLocaleString()} pts</strong></div>
+                        <div>💰 Túi Tiền Khách: <strong style="color:#059669;">$${order.budget.toLocaleString()}</strong></div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function deliverBuildModal() {
+            const missing = CATEGORIES.filter(c => !gameState.workbench[c]);
+            if (missing.length > 0) {
+                showToast(`❌ Lắp chưa xong! Đang thiếu: ${missing.join(', ')}`);
+                return;
+            }
+            if (gameState.orders.length === 0) {
+                showToast("❌ Hiện chưa có đơn đặt hàng nào!");
+                return;
+            }
+
+            const list = document.getElementById('deliver-orders-list');
+            list.innerHTML = '';
+            gameState.orders.forEach(o => {
+                const item = document.createElement('div');
+                item.className = 'inventory-item';
+                item.innerHTML = `
+                    <div>
+                        <strong style="font-size:0.85rem;">${o.clientName}</strong>
+                        <div style="font-size:0.7rem; color:#444;">Budget: $${o.budget} | Target: ${o.targetScore} pts</div>
+                    </div>
+                    <button class="nb-btn nb-btn-green" style="padding:4px 10px;" onclick="processDelivery('${o.id}')">Giao Hàng</button>
+                `;
+                list.appendChild(item);
+            });
+            openModal('modal-deliver');
+        }
+
+        function processDelivery(orderId) {
+            closeModal('modal-deliver');
+            const orderIdx = gameState.orders.findIndex(o => o.id == orderId);
+            if (orderIdx === -1) return;
+            const order = gameState.orders[orderIdx];
+
+            let buildScore = 0; let buildCost = 0;
+            CATEGORIES.forEach(c => { buildScore += gameState.workbench[c].score; buildCost += gameState.workbench[c].price; });
+
+            const metScore = buildScore >= order.targetScore;
+            const metBudget = buildCost <= order.budget;
+
+            let stars = 5; let reviewText = "";
+            if (metScore && metBudget) { stars = 5; reviewText = GENZ_PRAISES[Math.floor(Math.random() * GENZ_PRAISES.length)]; } 
+            else if (metScore && !metBudget) { stars = 3; reviewText = "Máy xịn đấy nhưng vượt Budget của em nha shop!"; } 
+            else if (!metScore && metBudget) { stars = 2; reviewText = "Giá rẻ nhưng máy hơi cùi bắp so với yêu cầu!"; } 
+            else { stars = 1; reviewText = GENZ_COMPLAINTS[Math.floor(Math.random() * GENZ_COMPLAINTS.length)]; }
+
+            // Payout calculation
+            let payout = Math.floor(buildCost * 1.35); // 35% markup logic
+            if (payout > order.budget) payout = order.budget; // Cannot charge more than budget
+            if (stars === 1) payout = Math.floor(buildCost * 0.9); // Take a loss if terrible
+
+            let tip = stars === 5 ? Math.floor(payout * 0.15) : 0;
+            let totalEarned = payout + tip;
+
+            // Update stats
+            gameState.cash += totalEarned;
+            gameState.dailyStats.revenue += totalEarned;
+            gameState.dailyStats.builds += 1;
+            gameState.todayServedClients += 1;
+            addXP(stars * 120);
+
+            if (stars >= 4) gameState.reputation = Math.min(100, gameState.reputation + 2);
+            else gameState.reputation = Math.max(10, gameState.reputation - 5);
+
+            gameState.reviews.unshift({
+                id: Date.now(), clientName: order.clientName, stars: stars, text: reviewText, earned: totalEarned, tip: tip
+            });
+            if (gameState.reviews.length > 10) gameState.reviews.pop();
+
+            // Clear bench & remove order
+            CATEGORIES.forEach(c => gameState.workbench[c] = null);
+            gameState.orders.splice(orderIdx, 1);
+
+            checkAndMaintainOrders();
+            renderHeader(); renderWorkbench(); renderOrders(); renderReviews();
+            saveGame();
+
+            showToast(`💰 ĐÃ BÁN! NHẬN +$${totalEarned.toLocaleString()} (${stars}⭐)`);
+
+            // Check Early Finish
+            if (gameState.todayServedClients >= gameState.dailyQuota) {
+                setTimeout(() => { triggerEndOfDay(true); }, 1000);
+            }
+        }
+
+        function renderReviews() {
+            const list = document.getElementById('reviews-list');
+            list.innerHTML = '';
+            if (gameState.reviews.length === 0) {
+                list.innerHTML = `<div style="text-align:center; color:#777; padding:15px; font-size:0.85rem;">Chưa có ai mua hàng cả, cố lên sếp!</div>`;
+                return;
+            }
+            gameState.reviews.forEach(r => {
+                const card = document.createElement('div');
+                card.className = 'review-card';
+                card.innerHTML = `
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <strong style="font-size:0.9rem;">${r.clientName}</strong>
+                        <div class="stars">${'★'.repeat(r.stars)}${'☆'.repeat(5 - r.stars)}</div>
+                    </div>
+                    <p style="font-size:0.8rem; color:#333; line-height:1.4;">"${r.text}"</p>
+                    <div style="font-size:0.75rem; color:#059669; font-weight:800; align-self:flex-end;">
+                        Thu về: +$${r.earned.toLocaleString()} ${r.tip > 0 ? `(Tiền bo: +$${r.tip})` : ''}
+                    </div>
+                `;
+                list.appendChild(card);
+            });
+        }
+
+        function editShopName() {
+            const val = prompt("Đổi tên Cửa Hàng:", gameState.shopName);
+            if (val && val.trim() !== "") { gameState.shopName = val.trim(); renderHeader(); saveGame(); }
+        }
+        function editManagerName() {
+            const val = prompt("Đổi tên Chủ Shop:", gameState.managerName);
+            if (val && val.trim() !== "") { gameState.managerName = val.trim(); renderHeader(); saveGame(); }
+        }
+        function manualSave() { saveGame(false); }
+        function copySaveCode() {
+            const textarea = document.getElementById('save-code-export');
+            textarea.select(); document.execCommand('copy');
+            showToast("📋 Đã copy Save Code vào bộ nhớ!");
+        }
+        function importSaveCode() {
+            const input = document.getElementById('save-code-import').value.trim();
+            if (!input) return showToast("❌ Hãy dán mã Save Code vào ô!");
+            try {
+                const parsed = JSON.parse(atob(input));
+                gameState = { ...DEFAULT_STATE, ...parsed };
+                saveGame(false); location.reload();
+            } catch (e) { showToast("❌ Mã Code không hợp lệ hoặc bị lỗi!"); }
+        }
+        function resetGameConfirm() {
+            if (confirm("⚠️ BẠN CÓ CHẮC CHẮN MUỐN XÓA TOÀN BỘ DỮ LIỆU ĐỂ CHƠI LẠI?")) {
+                localStorage.removeItem(SAVE_KEY);
+                location.reload();
+            }
+        }
+        function openModal(id) { document.getElementById(id).classList.add('active'); }
+        function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+        function showToast(msg) {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            toast.className = 'toast'; toast.innerText = msg;
+            container.appendChild(toast);
+            setTimeout(() => toast.remove(), 2500);
+        }
+
+        window.onload = function() {
+            initGame();
+        };
+    </script>
+</body>
+</html>
