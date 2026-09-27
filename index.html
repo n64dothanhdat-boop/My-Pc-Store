@@ -938,6 +938,15 @@
 
                 <hr style="border:1px solid var(--dark); margin:5px 0;">
 
+                <h2 style="font-size:1.1rem;" data-i18n="set_backup">💾 Sao Lưu Tiến Trình</h2>
+                <p style="font-size:0.75rem; color:#555; line-height:1.4;" data-i18n="set_backup_desc">Khi mở file game mới (cập nhật code), save cũ sẽ KHÔNG tự chuyển sang. Hãy xuất mã save trước, rồi nạp lại mã đó ở file mới để giữ tiến trình.</p>
+                <div style="display:flex; gap:8px; flex-wrap:wrap;">
+                    <button class="nb-btn nb-btn-yellow" style="flex:1;" onclick="openBackupModal()" data-i18n="set_export_btn">📤 Xuất Mã Save</button>
+                    <button class="nb-btn nb-btn-cyan" style="flex:1;" onclick="openBackupModal()" data-i18n="set_import_btn">📥 Nạp Mã Save</button>
+                </div>
+
+                <hr style="border:1px solid var(--dark); margin:5px 0;">
+
                 <button class="nb-btn nb-btn-pink" onclick="resetGameConfirm()" data-i18n="set_reset">💥 Xóa Dữ Liệu & Chơi Lại Từ Đầu</button>
             </div>
         </div>
@@ -1021,6 +1030,22 @@
         </div>
     </div>
 
+    <!-- BACKUP / RESTORE SAVE MODAL -->
+    <div id="modal-backup" class="modal-overlay">
+        <div class="modal-body">
+            <h2 style="font-size:1.1rem; text-align:center;" data-i18n="backup_title">💾 Sao Lưu / Khôi Phục Tiến Trình</h2>
+            <p style="font-size:0.75rem; color:#555; line-height:1.4; margin-top:6px;" data-i18n="backup_export_hint">Bấm "Xuất mã" rồi sao chép đoạn mã bên dưới, lưu lại (VD: gửi cho chính mình qua Notes/Zalo) để dùng cho file game mới.</p>
+            <p style="font-size:0.75rem; color:#555; line-height:1.4;" data-i18n="backup_import_hint">Dán đoạn mã save đã lưu vào ô bên dưới rồi bấm "Nạp mã".</p>
+            <textarea id="backup-textarea" class="nb-input" style="width:100%; height:110px; font-size:0.65rem; font-family:monospace; margin-top:8px; resize:vertical;" data-i18n-ph="backup_placeholder" placeholder="Mã save sẽ hiện ở đây sau khi bấm Xuất mã, hoặc dán mã đã lưu vào đây để Nạp lại..."></textarea>
+            <div style="display:flex; flex-wrap:wrap; gap:8px; margin-top:10px;">
+                <button class="nb-btn nb-btn-yellow" style="flex:1 1 100%;" onclick="exportSaveCode()" data-i18n="backup_export_btn">📤 Xuất Mã Từ Game Hiện Tại</button>
+                <button class="nb-btn nb-btn-cyan" style="flex:1;" onclick="copyBackupCode()" data-i18n="backup_copy_btn">📋 Sao Chép Mã</button>
+                <button class="nb-btn nb-btn-green" style="flex:1;" onclick="importSaveCode()" data-i18n="backup_import_btn">📥 Nạp Mã Vào Game</button>
+            </div>
+            <button class="nb-btn nb-btn-pink" style="width:100%; padding:10px; margin-top:10px;" onclick="closeModal('modal-backup')" data-i18n="backup_close">Đóng</button>
+        </div>
+    </div>
+
     <div id="toast-container"></div>
 
     <script>
@@ -1038,6 +1063,9 @@
                 order_title: "📋 Yêu Cầu Từ Khách Hàng", order_target: "Chỉ tiêu hôm nay:",
                 rev_title: "🌟 Uy Tín Cửa Hàng", rev_desc: "Danh tiếng cao thu hút khách VIP!", rev_recent: "💬 Phản Hồi Gần Đây",
                 set_lang: "🌐 Ngôn Ngữ / Language", set_pwa: "📲 Cài Đặt Lên Màn Hình Chính", set_pwa_btn: "📱 Hướng Dẫn Thêm Vào Màn Hình", set_reset: "💥 Xóa Dữ Liệu & Chơi Lại",
+                set_backup: "💾 Sao Lưu Tiến Trình", set_backup_desc: "Khi mở file game mới (cập nhật code), save cũ sẽ KHÔNG tự chuyển sang. Hãy xuất mã save trước, rồi nạp lại mã đó ở file mới để giữ tiến trình.", set_export_btn: "📤 Xuất Mã Save", set_import_btn: "📥 Nạp Mã Save",
+                backup_title: "💾 Sao Lưu / Khôi Phục Tiến Trình", backup_export_hint: "Bấm \"Xuất mã\" rồi sao chép đoạn mã bên dưới, lưu lại (VD: gửi cho chính mình qua Notes/Zalo) để dùng cho file game mới.", backup_import_hint: "Dán đoạn mã save đã lưu vào ô bên dưới rồi bấm \"Nạp mã\".", backup_export_btn: "📤 Xuất Mã Từ Game Hiện Tại", backup_copy_btn: "📋 Sao Chép Mã", backup_import_btn: "📥 Nạp Mã Vào Game", backup_close: "Đóng", backup_placeholder: "Mã save sẽ hiện ở đây sau khi bấm Xuất mã, hoặc dán mã đã lưu vào đây để Nạp lại...",
+                backup_exported: "✅ Đã tạo mã save, bấm Sao chép để lưu lại!", backup_copied: "✅ Đã sao chép mã save!", backup_copy_fail: "❌ Không tự sao chép được, hãy bôi đen & copy thủ công.", backup_import_empty: "❌ Hãy dán mã save vào ô trước đã!", backup_import_invalid: "❌ Mã save không hợp lệ, kiểm tra lại nhé!", backup_import_confirm: "⚠️ Nạp mã này sẽ GHI ĐÈ tiến trình hiện tại. Tiếp tục?", backup_import_ok: "✅ Đã khôi phục tiến trình thành công!",
                 onb_title: "Chào Mừng Boss GenZ!", onb_desc: "Bạn được cấp số vốn $5,000. Hãy đặt tên Shop và bắt đầu khởi nghiệp nào!", onb_shop: "🏪 Tên Cửa Hàng:", onb_boss: "😎 Tên Của Boss:", onb_btn: "🔥 MỞ CỬA KINH DOANH!",
                 eod_rev: "💵 Tiền Kiếm Được:", eod_exp: "🛒 Chi Mua Đồ:", eod_net: "📈 Lợi Nhuận:", eod_served: "💻 Khách Đã Phục Vụ:", eod_saved: "✅ Hệ thống đã tự động lưu tiến trình!", eod_next: "☀️ Bắt Đầu Ngày Mới (06:00 AM)",
                 del_title: "🚀 Giao Hàng Cho Khách", del_desc: "Chọn khách hàng để bàn giao bộ PC này:", del_cancel: "Hủy / Đóng",
@@ -1055,6 +1083,9 @@
                 order_title: "📋 Customer Requests", order_target: "Today's Quota:",
                 rev_title: "🌟 Shop Reputation", rev_desc: "High reputation attracts VIP clients!", rev_recent: "💬 Recent Feedback",
                 set_lang: "🌐 Language", set_pwa: "📲 Add to Home Screen", set_pwa_btn: "📱 Install Guide", set_reset: "💥 Reset Game Data",
+                set_backup: "💾 Backup Progress", set_backup_desc: "Opening a new/updated game file will NOT automatically carry over your old save. Export your save code first, then import it in the new file to keep your progress.", set_export_btn: "📤 Export Save Code", set_import_btn: "📥 Import Save Code",
+                backup_title: "💾 Backup / Restore Progress", backup_export_hint: "Tap \"Export\" then copy the code below and keep it somewhere (e.g. send it to yourself via Notes) so you can use it in the new game file.", backup_import_hint: "Paste your saved code into the box below, then tap \"Import\".", backup_export_btn: "📤 Export From Current Game", backup_copy_btn: "📋 Copy Code", backup_import_btn: "📥 Import Into Game", backup_close: "Close", backup_placeholder: "Save code will appear here after Export, or paste a saved code here to Import...",
+                backup_exported: "✅ Save code generated, tap Copy to save it!", backup_copied: "✅ Save code copied!", backup_copy_fail: "❌ Couldn't auto-copy, please select & copy manually.", backup_import_empty: "❌ Please paste a save code first!", backup_import_invalid: "❌ Invalid save code, please check it!", backup_import_confirm: "⚠️ Importing this will OVERWRITE your current progress. Continue?", backup_import_ok: "✅ Progress restored successfully!",
                 onb_title: "Welcome Boss!", onb_desc: "You have a starting capital of $5,000. Name your shop and start building!", onb_shop: "🏪 Shop Name:", onb_boss: "😎 Manager Name:", onb_btn: "🔥 OPEN FOR BUSINESS!",
                 eod_rev: "💵 Revenue Earned:", eod_exp: "🛒 Hardware Costs:", eod_net: "📈 Net Profit:", eod_served: "💻 Clients Served:", eod_saved: "✅ Progress auto-saved!", eod_next: "☀️ Start Next Day (06:00 AM)",
                 del_title: "🚀 Deliver PC", del_desc: "Select a client to deliver this PC:", del_cancel: "Cancel / Close",
@@ -1072,6 +1103,9 @@
                 order_title: "📋 客户需求", order_target: "今日目标:",
                 rev_title: "🌟 商店声誉", rev_desc: "高声誉吸引VIP客户！", rev_recent: "💬 最近反馈",
                 set_lang: "🌐 语言 / Language", set_pwa: "📲 添加到主屏幕", set_pwa_btn: "📱 安装指南", set_reset: "💥 重置游戏数据",
+                set_backup: "💾 备份进度", set_backup_desc: "打开新的/更新后的游戏文件不会自动带入旧存档。请先导出存档代码，再到新文件里导入，以保留进度。", set_export_btn: "📤 导出存档代码", set_import_btn: "📥 导入存档代码",
+                backup_title: "💾 备份 / 恢复进度", backup_export_hint: "点击“导出”，然后复制下方代码并保存好（例如发送到备忘录），以便在新文件中使用。", backup_import_hint: "将保存的代码粘贴到下方输入框，然后点击“导入”。", backup_export_btn: "📤 从当前游戏导出", backup_copy_btn: "📋 复制代码", backup_import_btn: "📥 导入到游戏", backup_close: "关闭", backup_placeholder: "点击导出后代码会显示在这里，或粘贴已保存的代码进行导入...",
+                backup_exported: "✅ 已生成存档代码，点击复制保存！", backup_copied: "✅ 存档代码已复制！", backup_copy_fail: "❌ 自动复制失败，请手动选中并复制。", backup_import_empty: "❌ 请先粘贴存档代码！", backup_import_invalid: "❌ 存档代码无效，请检查！", backup_import_confirm: "⚠️ 导入将覆盖当前进度，确定继续吗？", backup_import_ok: "✅ 进度已成功恢复！",
                 onb_title: "欢迎老板！", onb_desc: "你有 $5,000 的启动资金。请命名你的商店并开始营业！", onb_shop: "🏪 商店名称:", onb_boss: "😎 老板名称:", onb_btn: "🔥 开始营业！",
                 eod_rev: "💵 收入:", eod_exp: "🛒 硬件支出:", eod_net: "📈 净利润:", eod_served: "💻 服务的客户:", eod_saved: "✅ 进度已自动保存！", eod_next: "☀️ 开始新的一天 (06:00 AM)",
                 del_title: "🚀 交付电脑", del_desc: "选择客户来交付这台电脑:", del_cancel: "取消 / 关闭",
@@ -1293,6 +1327,83 @@
             checkLevelUp();
             checkAndMaintainOrders();
             startClock();
+        }
+
+        // === SAO LƯU / KHÔI PHỤC TIẾN TRÌNH GIỮA CÁC FILE ===
+        // localStorage bị ràng buộc theo "nguồn" (origin) của file HTML đang mở.
+        // Trên iOS, mỗi khi nhận 1 file mới (kể cả cùng tên) thường là 1 nguồn khác,
+        // nên save cũ không tự chuyển sang. Đây là cách xuất/nhập thủ công qua 1 đoạn mã text.
+        function openBackupModal() {
+            const box = document.getElementById('backup-textarea');
+            if (box) box.value = '';
+            openModal('modal-backup');
+        }
+
+        function exportSaveCode() {
+            try {
+                const json = JSON.stringify(gameState);
+                const code = btoa(unescape(encodeURIComponent(json)));
+                const box = document.getElementById('backup-textarea');
+                if (box) {
+                    box.value = code;
+                    box.focus();
+                    box.setSelectionRange(0, code.length);
+                }
+                showToast(t('backup_exported'));
+            } catch (e) {
+                console.error(e);
+            }
+        }
+
+        function copyBackupCode() {
+            const box = document.getElementById('backup-textarea');
+            const code = box ? box.value.trim() : '';
+            if (!code) return showToast(t('backup_import_empty'));
+
+            const fallbackCopy = () => {
+                box.focus();
+                box.setSelectionRange(0, code.length);
+                try {
+                    document.execCommand('copy');
+                    showToast(t('backup_copied'));
+                } catch (e) {
+                    showToast(t('backup_copy_fail'));
+                }
+            };
+
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(code).then(() => {
+                    showToast(t('backup_copied'));
+                }).catch(fallbackCopy);
+            } else {
+                fallbackCopy();
+            }
+        }
+
+        function importSaveCode() {
+            const box = document.getElementById('backup-textarea');
+            const code = box ? box.value.trim() : '';
+            if (!code) return showToast(t('backup_import_empty'));
+
+            let parsed;
+            try {
+                const json = decodeURIComponent(escape(atob(code)));
+                parsed = JSON.parse(json);
+                if (!parsed || typeof parsed !== 'object') throw new Error('invalid');
+            } catch (e) {
+                return showToast(t('backup_import_invalid'));
+            }
+
+            if (!confirm(t('backup_import_confirm'))) return;
+
+            gameState = { ...DEFAULT_STATE, ...parsed };
+            if (!gameState.level) gameState.level = 1;
+            if (!gameState.xp) gameState.xp = 0;
+            if (!gameState.language) gameState.language = 'vi';
+            saveGame(true);
+            showToast(t('backup_import_ok'));
+            closeModal('modal-backup');
+            setTimeout(() => location.reload(), 700);
         }
 
         function saveGame(silent = true) {
